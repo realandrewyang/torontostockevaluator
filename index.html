@@ -1,35 +1,84 @@
-;<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <style>
-    h1.serif {
-      font-family: EB Garamond, serif;
-      font-weight: normal;
-      font-size: 40px;
+<head>
+<style> 
+
+h1.serif {
+    font-family: EB Garamond, serif;
+    font-weight: normal;
+    font-size: 24px;
     }
-    p.serif {
-      font-family: "Times New Roman", Times, serif;
-      font-weight: normal;
-      font-size: 16px;
+
+p.serif {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: normal;
+    font-size: 16px;
+
     }
-    p.sansserif {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: normal;
-      font-size: 16px;
+
+p.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 16px;
     }
-    h1 {
-      margin-left: 80px;
-    }
-    p {
-      margin-left: 80px;
-    }
-  </style>
-  <head>
-    <title>Toronto Stock Evaluator</title>
-  </head>
-  <body>
-    <h1 class="serif"; style="color:Tomato">Toronto Stock Evaluator</h1>
-    <p class="serif">By Andrew Yang, Filip Stojanovic, and Graeme Ferguson</p>
-    <p class="sansserif">The Toronto Stock Evaluator provides real-time data analysis concerning the Toronto Stock Exchange.</p>
+    
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+
+.article {
+    text-align: left;
+}
+
+header {background: black;color:white;}
+footer {background: #aaa;color:white;}
+.nav {background:#aaa;}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+.nav ul a {
+    text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+
+<div class="flex-container">
+<header>
+  <h1>Toronto Stock Evaluator</h1>
+  <p>By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
+</header>
+
+<nav class="nav">
+<ul>
+  <li><a href="#">Quote Lookup</a></li>
+  <li><a href="#">Biggest Gains</a></li>
+  <li><a href="#">Top Choices</a></li>
+    
+</ul>
+</nav>
+
+<article class="article">
+	<p>The Toronto Stock Evaluator provides real-time data analysis concerning the
+    Toronto Stock Exchange.</p>
     <img src="stockgraph1.jpg" alt="Stock price over time" style="width:400px;height:200px;"> 
-  </body>
+</article>
+
+<footer>Copyright &copy; realandrewyang.github.io </footer>
+</div>
+
+</body>
 </html>
