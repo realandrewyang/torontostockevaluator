@@ -15,6 +15,14 @@ request.onload = function () {
 // Send request
 request.send();
 
+// Begin accessing JSON data here
+var data = JSON.parse(this.response);
+
+data.forEach(    => {
+  // Log the quotes
+  console.log(     );
+});
+
 
 
 --!>
