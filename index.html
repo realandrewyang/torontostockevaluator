@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style> 
 
 h1.serif {
@@ -42,34 +43,85 @@ p.sansserif {
 
 header {background: #00BFFF;color:white;}
 footer {background: #aaa;color:white;}
-.nav {background:#aaa;}
+	
+	
+* {box-sizing: border-box;}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
 
 </style>
 </head>
 <body>
+	
+<div class="topnav">
+  <a class="active" href="index">Home</a>
+  <a href="quote_lookup">Quote Lookup</a>
+  <a href="biggest_gains">Biggest Gains</a>
+  <a href="top_choices">Top Choices</a>
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
 
 <div class="flex-container">
 	
 <header>
-<ul>
   <h1>Toronto Stock Evaluator</h1>
-</ul>
-  <p>
-    <a href="index" style="margin-right: 9%;">Home</a>
-    <a href="quote_lookup" style = "margin-right: 3%;">Quote Lookup</a>
-    By Andrew Yang, Filip Stojanovic & Graeme Ferguson
-    <a href="biggest_gains" style = "margin-left: 3%;">Biggest Gains</a>
-    <a href="top_choices" style = "margin-left: 9%;">Top Choices</a>
-  </p>
-	
-  <form>
-    <input type="text" name="lookup" placeholder="Search">
-    <input type="image" src="search.png" alt="Submit" width="20" height="20">  
-  </form>
+  <p>By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
 	
 </header>
-
-  
 
 <article class="article">
 	<p>The Toronto Stock Evaluator provides real-time data analysis concerning the
