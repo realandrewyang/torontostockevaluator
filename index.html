@@ -1,3 +1,22 @@
+<?php 
+	$API_KEY= '4IZG324QO46F99VH';
+
+	if (!empty($_GET['search'])){
+		$stocks_url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' . urlencode($_GET['search']) . '&apikey=' . $API_KEY;
+
+		$stocks_json = file_get_contents($stocks_url);
+		$stocks_array = json_decode($stocks_json, true);
+
+		$stocks_price = $stocks_array['Time Series (Daily)']['2018-05-22']['1. open'];
+		
+		echo "testing";
+		echo ' this';
+	}
+
+	echo "instead";
+	echo 'false';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,25 +148,6 @@ footer {background: #aaa;color:white;}
     Toronto Stock Exchange.</p>
     <img src="stockgraph1.jpg" alt="Stock price over time" style="width:400px;height:200px;"> 
 </article>
-
-<?php 
-	$API_KEY= '4IZG324QO46F99VH';
-
-	if (!empty($_GET['search'])){
-		$stocks_url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' . urlencode($_GET['search']) . '&apikey=' . $API_KEY;
-
-		$stocks_json = file_get_contents($stocks_url);
-		$stocks_array = json_decode($stocks_json, true);
-
-		$stocks_price = $stocks_array['Time Series (Daily)']['2018-05-22']['1. open'];
-		
-		echo "testing";
-		echo ' this';
-	}
-
-	echo "instead";
-	echo 'false';
-?>
 	
 <footer>Copyright &copy; realandrewyang.github.io </footer>
 	
