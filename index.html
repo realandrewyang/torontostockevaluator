@@ -8,6 +8,8 @@ if (!empty($_GET['search'])){
 	$stocks_array = json_decode($stocks_json, true);
 	
 	$stocks_price = $stocks_array['results'][0]<!---[data specification]--->;
+
+	echo $dataForSingleData->{'1. open'} . '<br/>';
 }
 
 ?>
