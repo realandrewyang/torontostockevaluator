@@ -1,3 +1,16 @@
+<?php 
+if (!empty($_GET['search'])){
+	$stocks_url = '<!---api name here---> . urlencode($_GET['location']);
+	
+	$stocks_json = file_get_contents($stocks_url);
+	$stocks_array = json_decode($stocks_json, true);
+	
+	$stocks_price = $stocks_array['results'][0]<!---[data specification]--->;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,7 +123,8 @@ footer {background: #aaa;color:white;}
   <div class="search-container">
     <form action="/action_page.php">
       <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+	<!---commented something out here---> 
+      <button type="submit">submit <!---<i class="fa fa-search"></i>---> </button>
     </form>
   </div>
 </div>
