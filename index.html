@@ -1,5 +1,6 @@
 <?php 
 $API_KEY= '4IZG324QO46F99VH';
+$dataForSingleData = '';
 
 if (!empty($_GET['search'])){
 	$stocks_url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' . urlencode($_GET['search']) . '&apikey=' . urlencode($API_KEY);
