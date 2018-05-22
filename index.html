@@ -154,9 +154,9 @@ footer {background: #aaa;color:white;}
 </div>
 	
 <script>
-jQuery.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=4IZG324QO46F99VH', function(data) {
-    //data is the JSON string
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=4IZG324QO46F99VH', function(data) {	
 });
+document.write(data);
 </script>
 	
 </body>
