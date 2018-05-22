@@ -154,7 +154,14 @@ footer {background: #aaa;color:white;}
 </div>
 	
 <script>
-document.write("Hello World");
+function UserAction() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=4IZG324QO46F99VH", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+    var response = JSON.parse(xhttp.responseText);
+    document.write(response);
+}
 </script>
 	
 </body>
