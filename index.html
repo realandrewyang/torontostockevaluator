@@ -1,16 +1,3 @@
-<?php 
-$API_KEY= '4IZG324QO46F99VH';
-
-if (!empty($_GET['search'])){
-	$stocks_url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' . urlencode($_GET['search']) . '&apikey=' . $API_KEY;
-	
-	$stocks_json = file_get_contents($stocks_url);
-	$stocks_array = json_decode($stocks_json, true);
-	
-	$stocks_price = $stocks_array['Time Series (Daily)']['2018-05-22']['1. open'];
-
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,9 +101,20 @@ footer {background: #aaa;color:white;}
 </style>
 </head>
 <body>
-	<?php 
-	echo "<h1>" . $stocks_price . "</h1>";
-	?>
+<?php 
+	$API_KEY= '4IZG324QO46F99VH';
+
+	if (!empty($_GET['search'])){
+		$stocks_url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' . urlencode($_GET['search']) . '&apikey=' . $API_KEY;
+
+		$stocks_json = file_get_contents($stocks_url);
+		$stocks_array = json_decode($stocks_json, true);
+
+		$stocks_price = $stocks_array['Time Series (Daily)']['2018-05-22']['1. open'];
+		
+		echo "<h1>" . $stocks_price . "</h1>";
+	}
+?>
 </body>
 	
 <div class="topnav">
