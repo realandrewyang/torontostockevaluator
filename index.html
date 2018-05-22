@@ -7,7 +7,7 @@ if (!empty($_GET['search'])){
 	$stocks_json = file_get_contents($stocks_url);
 	$stocks_array = json_decode($stocks_json, true);
 	
-	$stocks_price = $stocks_array['results'][0]<!---[data specification]--->;
+	$stocks_price = $stocks_array['results'][0];<!---[data specification]--->
 
 	echo $dataForSingleData->{'1. open'} . '<br/>';
 }
