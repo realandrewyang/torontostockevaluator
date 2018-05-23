@@ -131,15 +131,13 @@ footer {background: #aaa;color:white;}
     }
 
     function showText(responseAsText) {
+      var obj = JSON.parse(responseAsTest);
+      var msg = document.getElementById('test');
+      msg.textContent = obj["Meta Data"]["1. Information"];
+	    
       // Assuming the DOM has a div with id 'otherTest'
       var message = document.getElementById('otherTest');
       message.textContent = responseAsText;
-    }
-    
-    function showSnippet(jsonObject){
-      var obj = JSON.parse(jsonObject);
-      var msg = document.getElementById('test');
-      msg.textContent = obj["Meta Data"]["1. Information"];
     }
 
     function fetchText(pathToResource) {
@@ -147,7 +145,6 @@ footer {background: #aaa;color:white;}
       .then(validateResponse)
       .then(readResponseAsText)
       .then(showText)
-      .then(showSnippet)
       .catch(logError);
     }
 
