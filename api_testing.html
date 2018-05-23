@@ -104,7 +104,8 @@ footer {background: #aaa;color:white;}
 </header>
 
 <article class="article">
-	<p id = 'test'></p>
+  <p id = 'test'></p>
+  <p id = 'otherTest'></p>
   <script>
     function logResult(result) {
       console.log(result);
@@ -130,9 +131,15 @@ footer {background: #aaa;color:white;}
     }
 
     function showText(responseAsText) {
-      // Assuming the DOM has a div with id 'test'
-      var message = document.getElementById('test');
+      // Assuming the DOM has a div with id 'otherTest'
+      var message = document.getElementById('otherTest');
       message.textContent = responseAsText;
+    }
+    
+    function showSnippet(jsonObject){
+      var obj = JSON.parse(jsonObject);
+      var msg = document.getElementById('test');
+      msg.textContent = obj["Meta Data"]["1. Information"];
     }
 
     function fetchText(pathToResource) {
@@ -140,6 +147,7 @@ footer {background: #aaa;color:white;}
       .then(validateResponse)
       .then(readResponseAsText)
       .then(showText)
+      .then(showSnippet)
       .catch(logError);
     }
 
