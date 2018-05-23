@@ -79,6 +79,18 @@ footer {background: #aaa;color:white;}
 .topnav .search-container button:hover {
   background: #ccc;
 }
+	
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+td {
+    border: 2px solid black;
+    text-align: center;
+    padding: 8px;
+}
+	
 </style>
 </head>
 <body>
@@ -148,6 +160,33 @@ footer {background: #aaa;color:white;}
 
     fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=demo');
   </script>
+	
+<p id = 'symbol'></p>
+<p id = 'name'></p>
+
+<table style="width: 100px">
+  <tr>
+    <td>Open</td>
+    <td id = 'open'></td>
+  </tr>
+  <tr>
+    <td>Close</td>
+    <td id = 'close'></td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td id = 'high'></td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td id = 'low'></td>
+  </tr>
+  <tr>
+    <td>Volume</td>
+    <td id = 'volume'></td>
+  </tr>
+</table>
+
 </article>
 
 <footer>Copyright &copy; realandrewyang.github.io </footer>
