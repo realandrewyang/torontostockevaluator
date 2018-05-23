@@ -160,13 +160,31 @@ td {
       return response.text();
     }
     function showText(responseAsText) {
+	    
+      // Parse text and create keys
       var obj = JSON.parse(responseAsText);
       var id = ['open', 'high', 'low', 'close', 'volume'];
+      
+      // Insert text into table
       for (var i = 0; i < 5; i++){
       	document.getElementById(id[i]).innerHTML = obj["Time Series (1min)"]["2018-05-23 14:33:00"][String.fromCharCode(i + 49) + '. ' + id[i]];
       }
       document.getElementById('symbol').innerHTML = "MSFT";
+	    
+      'use strict';
+
+      const fs = require('fs');
+
+      let data = JSON.stringify(obj);
+
+      fs.writeFile('cache.json', data, (err) => {  
+	if (err) throw err;
+	   console.log('Data written to file');
+      });
+
+      console.log('This is after the write call'); 
     }
+	  
     function fetchText(pathToResource) {
       fetch(pathToResource)
       .then(validateResponse)
