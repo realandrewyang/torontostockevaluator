@@ -133,10 +133,6 @@ footer {background: #aaa;color:white;}
     function showText(responseAsText) {
       var obj = JSON.parse(responseAsText);
       document.getElementById('test').innerHTML = obj["Meta Data"]["1. Information"];
-	    
-      // Assuming the DOM has a div with id 'otherTest'
-      var message = document.getElementById('otherTest');
-      message.textContent = responseAsText;
     }
 
     function fetchText(pathToResource) {
