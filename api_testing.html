@@ -138,17 +138,6 @@ footer {background: #aaa;color:white;}
       document.getElementById('open').innerHTML = obj["Meta Data"]["2. Symbol"];
     }
 
-    function sendToPage(){
-      var input = document.getElementById("search").value;
-
-      //alert(input);
-      if (input. === ""){
-        alert('Invalid input.');
-      } else {
-	return input;
-      }
-    }
-
     function fetchText(pathToResource) {
       fetch(pathToResource)
       .then(validateResponse)
@@ -157,7 +146,7 @@ footer {background: #aaa;color:white;}
       .catch(logError);
     }
 
-    fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + sentToPage() + '&interval=1min&apikey=demo');
+    fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=demo');
   </script>
 </article>
 
