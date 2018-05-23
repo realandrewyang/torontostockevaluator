@@ -104,8 +104,11 @@ footer {background: #aaa;color:white;}
 </header>
 
 <article class="article">
-  <p id = 'test'></p>
-  <p id = 'otherTest'></p>
+  <p id = 'open'></p>
+  <p id = 'high'></p>
+  <p id = 'close'></p>
+  <p id = 'low'></p>
+  <p id = 'volume'></p>
   <script>
     function logResult(result) {
       console.log(result);
@@ -132,7 +135,7 @@ footer {background: #aaa;color:white;}
 
     function showText(responseAsText) {
       var obj = JSON.parse(responseAsText);
-      document.getElementById('test').innerHTML = obj["Meta Data"]["1. Information"];
+      document.getElementById('open').innerHTML = obj["Meta Data"]["1. Information"];
     }
 
     function fetchText(pathToResource) {
