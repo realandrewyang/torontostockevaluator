@@ -171,27 +171,9 @@ td {
       }
       document.getElementById('symbol').innerHTML = "MSFT";
 	    
-      'use strict';
-
-      const fs = require('fs');
-
-      let data = JSON.stringify(obj);
-
-      fs.writeFile('cache.json', data, (err) => {  
-	if (err) throw err;
-	   console.log('Data written to file'); document.getElementById('name') = "Microsoft";
-      });
-
-      console.log('This is after the write call'); 
-    }
-	  
-    function fetchText(pathToResource) {
-      fetch(pathToResource)
-      .then(validateResponse)
-      .then(readResponseAsText)
-      .then(showText)
-      .catch(logError);
-    }
+      // Write JSON to cache.json
+      var jsonfile = require('cache.js');
+      jsonfile.writeFile(responseAsText);
     
     fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=demo');
   </script>
