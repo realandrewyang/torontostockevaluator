@@ -174,7 +174,7 @@ td {
       // Write JSON to cache.json
       var jsonfile = require('cache.json');
       jsonfile.writeFile(responseAsText);
-	   
+    }
     function fetchText(pathToResource) {
       fetch(pathToResource)
       .then(validateResponse)
