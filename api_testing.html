@@ -163,8 +163,15 @@ td {
 	    
       // Get current date
       var currentdate = new Date();
+      var monthAsString;
       var month = parseInt(currentdate.getMonth()) + 1;
-      var datetime = currentdate.getFullYear() + "-" + month.toString() + "-" + currentdate.getDate() + " ";
+      if (month < 10){
+        monthAsString = "0" + month.toString();
+      } else {
+        monthAsString = month.toString();
+      }
+
+      var datetime = currentdate.getFullYear() + "-" + monthAsString + "-" + currentdate.getDate() + " ";
       if (parseInt(currentdate.getHours()) > 16){
         datetime += "15:59:00";
       } else {
