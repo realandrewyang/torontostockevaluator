@@ -162,8 +162,9 @@ td {
     function showText(responseAsText) {
 	    
       // Get current date
-      var currentdate = new Date(); 
-      var datetime = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDate() + " ";
+      var currentdate = new Date();
+      var month = parseInt(currentdate.getMonth()) + 1;
+      var datetime = currentdate.getFullYear() + "-" + month.toString() + "-" + currentdate.getDate() + " ";
       if (parseInt(currentdate.getHours()) > 16){
         datetime += "15:59:00";
       } else {
