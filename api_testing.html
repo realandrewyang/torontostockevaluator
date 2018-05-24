@@ -163,12 +163,22 @@ td {
 	    
       // Get current date
       var currentdate = new Date();
-      var monthAsString;
       var month = parseInt(currentdate.getMonth()) + 1;
+      var monthAsString = month.toString();
+      var hour = parseInt(currentdate.getHours());
+      var hourAsString = hour.toString();
+      var minute = parseInt(currentdate.getMinutes());
+      var minuteAsString = minute.toString();
+	    
+      // Add 0 if only one digit
       if (month < 10){
-        monthAsString = "0" + month.toString();
-      } else {
-        monthAsString = month.toString();
+        monthAsString = "0" + monthAsString;
+      }
+      if (hour < 10){
+        hourAsString = "0" + hourAsString;
+      }
+      if (minute < 10){
+        minuteAsString = "0" + minuteAsString;
       }
 
       var datetime = currentdate.getFullYear() + "-" + monthAsString + "-" + currentdate.getDate() + " ";
