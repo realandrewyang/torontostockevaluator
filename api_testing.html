@@ -181,6 +181,7 @@ td {
         minuteAsString = "0" + minuteAsString;
       }
 
+      // Set time to 3:59 p.m. after the market closes
       var datetime = currentdate.getFullYear() + "-" + monthAsString + "-" + currentdate.getDate() + " ";
       if (parseInt(currentdate.getHours()) > 16){
         datetime += "15:59:00";
