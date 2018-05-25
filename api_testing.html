@@ -92,8 +92,14 @@ td {
 	
 </style>
 </head>
+	
+<script>
+	function getTicker(){
+		var ticker= document.getElementById('ticker');	
+	}
+</script>	
+	
 <body>
-
 <div class="topnav">
   <a href="index">Home</a>
   <a href="quote_lookup">Quote Lookup</a>
@@ -102,8 +108,9 @@ td {
   <a class="active" href="api_testing">API Testing</a>
   <div class="search-container">
     <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
+      <input type="text" placeholder="Search.." name="search" id="ticker"/>
       <button type="submit"><i class="fa fa-search"></i></button>
+      <input type="button" value="submit" onclick="getTicker();">
     </form>
   </div>
 </div>
