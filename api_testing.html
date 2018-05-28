@@ -148,6 +148,13 @@ td {
     <td id = 'volume'></td>
   </tr>
   <script>
+    function addZero(num){
+      var ret = num.toString();
+      if (num < 10){
+        ret = "0" + num.toString();
+      }
+      return ret;
+    }
     function logResult(result) {
       console.log(result);
     }
@@ -172,54 +179,41 @@ td {
       var datetime = "";
       var currentdate = new Date();
       var year = parseInt(currentdate.getYear());
-      var yearAsString = year.toString();
       var month = parseInt(currentdate.getMonth()) + 1;
-      var monthAsString = month.toString();
+      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      var date = parseInt(currentdate.getDate());
       var hour = parseInt(currentdate.getHours());
-      var hourAsString = hour.toString();
       var minute = parseInt(currentdate.getMinutes());
-      var minuteAsString = minute.toString();
 	    
       // Check if market is currently closed
       if (parseInt(currentdate.getHours()) > 16){
-        datetime = currentdate.getFullYear() + "-" + monthAsString + "-" + currentdate.getDate() + " " + "15:59:00";
+        datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
       
       // Use previous day if market will open later in the day
-      } else if (parseInt(currentdate.getHours()) < 9){
+      } else if (hour < 9){
 	      
 	// Beginning of the month exception
         if (currentdate == 1){
 	
 	  // January 1st exception
 	  if (month == 1){
-	    year--; yearAsString = year.toString();
-	    month = 12; monthAsString = "12";
-            day
+	    year--;
+	    month = 12;
+	  } else {
+	    month--;
 	  }
-		
-          month--;
-
-	}
-      }
-	    
-      // Add 0 if only one digit
-      if (month < 10){
-        monthAsString = "0" + monthAsString;
-      }
-      if (hour < 10){
-        hourAsString = "0" + hourAsString;
-      }
-      if (minute < 10){
-        minuteAsString = "0" + minuteAsString;
-      }
-
-      // Set time to 3:59 p.m. after the market closes
-      var datetime = currentdate.getFullYear() + "-" + monthAsString + "-" + currentdate.getDate() + " ";
-      if (parseInt(currentdate.getHours()) > 16){
-        datetime += "15:59:00";
+	  
+	  // Set date to the last day of the previous month
+          date = monthLength[month - 2];
+          datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
+	} else {
+          datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";
+      
+      // Final case where the stock market is open
       } else {
-        datetime += currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + "00";
-      }
+	datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
+      }    
+
       document.getElementById('name').innerHTML = datetime;
 	    
       // Parse text and create keys
