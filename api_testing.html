@@ -186,7 +186,7 @@ td {
       var minute = parseInt(currentdate.getMinutes());
 	    
       // Check if market is currently closed
-      if (parseInt(currentdate.getHours()) > 16 or (parseInt(currentdate.getHours()) == 16 and parseInt(currentdate.getMinutes()) > 0)){
+      if (hour * 60 + minute > 16 * 60){
         datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
       
       // Use previous day if market will open later in the day
