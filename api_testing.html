@@ -95,7 +95,7 @@ td {
 	
 <script>
 	function getTicker(){
-		var ticker= document.getElementById('ticker').innerHTML;	
+		var ticker= document.getElementById('ticker').value;	
 		document.getElementById('symbol').innerHTML = ticker;
 	}
 </script>	
@@ -109,8 +109,9 @@ td {
   <a class="active" href="api_testing">API Testing</a>
   <div class="search-container">
     <form>
-      <input type="text" placeholder="Search.." name="search" id="ticker"/>
-      <button type="submit" onclick="getTicker();"><i class="fa fa-search"></i></button>
+      <input type="text" placeholder="Search.." name="search" method="put" id="ticker" value="">
+      <input type='submit' onclick="getTicker():" />
+      <!--<button type="submit" onclick="getTicker();">-->   <i class="fa fa-search"></i></button>
     </form>
   </div>
 </div>
