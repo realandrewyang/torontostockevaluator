@@ -107,7 +107,7 @@ td {
   <a href="top_choices">Top Choices</a>
   <a class="active" href="api_testing">API Testing</a>
   <div class="search-container">
-    <form action="/action_page.php">
+    <form>
       <input type="text" placeholder="Search.." name="search" id="ticker"/>
       <button type="submit"><i class="fa fa-search"></i></button>
       <input type="button" value="submit" onclick="getTicker();">
@@ -186,7 +186,7 @@ td {
       var minute = parseInt(currentdate.getMinutes());
 	    
       // Check if market is currently closed
-      if (parseInt(currentdate.getHours()) > 16){
+      if (parseInt(currentdate.getHours()) > 16 or (parseInt(currentdate.getHours()) == 16 and parseInt(currentdate.getMinutes()) > 0)){
         datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
       
       // Use previous day if market will open later in the day
