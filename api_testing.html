@@ -194,7 +194,8 @@ td {
     
     function getTicker(){
       var ticker= document.getElementById('ticker').value;	
-      document.getElementById('symbol').innerHTML = ticker;
+      document.getElementById('test').innerHTML = ticker;
+      
       fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH');
     }	  
@@ -218,7 +219,7 @@ td {
 <div class="flex-container">
 <header>
   <h1>Toronto Stock Evaluator - API Testing</h1>
-  <p>By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
+  <p id = "test">By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
 </header>
 
 <article class="article">
