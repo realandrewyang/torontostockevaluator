@@ -192,14 +192,12 @@ td {
       .catch(logError);
     }
     
-    fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + document.getElementById('symbol').innerHTML
+    function getTicker(){
+      var ticker= document.getElementById('ticker').value;	
+      document.getElementById('symbol').innerHTML = ticker;
+      fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + document.getElementById('symbol').innerHTML
 	      + '&interval=1min&apikey=4IZG324QO46F99VH');
-  </script>	
-<script>
-	function getTicker(){
-		var ticker= document.getElementById('ticker').value;	
-		document.getElementById('symbol').innerHTML = ticker;
-	}
+    }	  
 </script>	
 	
 <body>
