@@ -96,6 +96,7 @@ td {
 <script>
 	function getTicker(){
 		var ticker= document.getElementById('ticker');	
+		document.getElementById('symbol').innerHTML = ticker;
 	}
 </script>	
 	
@@ -225,7 +226,7 @@ td {
       for (var i = 0; i < 5; i++){
       	document.getElementById(id[i]).innerHTML = obj["Time Series (1min)"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
       }
-      document.getElementById('symbol').innerHTML = "MSFT";
+      // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
       var fs = require("fs");
@@ -247,7 +248,8 @@ td {
       .catch(logError);
     }
     
-    fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=4IZG324QO46F99VH');
+    fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + document.getElementById('symbol').innerHTML
+	      + 'MSFT&interval=1min&apikey=4IZG324QO46F99VH');
   </script>
 </table>
 
