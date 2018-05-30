@@ -176,7 +176,7 @@ td {
       var fs = require("fs");
       var fileContent = "hello";
 
-      fs.writeFile("cache.json", responseAsText, (err) => {
+      fs.writeFile("cache.json", fileContent, (err) => {
       if (err) {
         console.error(err);
         return;
