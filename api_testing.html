@@ -92,17 +92,66 @@ td {
 	
 </style>
 
-<script>
 
+</head>
+	
+<body>
+	
+<div class="flex-container">
+<header>
+  <h1>Toronto Stock Evaluator - API Testing</h1>
+  <p id = "test">By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
+</header>
+
+<article class="article">
+	
+<p id = 'symbol'></p>
+<p id = 'name'></p>
+
+<table style="width: 100px">
+  <tr>
+    <td>Open</td>
+    <td id = 'open'></td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td id = 'high'></td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td id = 'low'></td>
+  </tr>
+  <tr>
+    <td>Close</td>
+    <td id = 'close'></td>
+  </tr>
+  <tr>
+    <td>Volume</td>
+    <td id = 'volume'></td>
+  </tr>
+</table>
+
+</article>
+	
+<div class="topnav">
+  <a href="index">Home</a>
+  <a href="quote_lookup">Quote Lookup</a>
+  <a href="biggest_gains">Biggest Gains</a>
+  <a href="top_choices">Top Choices</a>
+  <a class="active" href="api_testing">API Testing</a>
+  <div class="search-container">
+    <form>
+      <input type="text" placeholder="Search.." name="search" onkeyup=getTicker(this) method="put" id="ticker">
+    	<script>
     function addZero(num){
-      var ret = num.toString();
-      if (num < 10){
-        ret = "0" + num.toString();
-      }
-      return ret;
+     	var ret = num.toString();
+   	if (num < 10){
+  	    ret = "0" + num.toString();
+        }
+        return ret;
     }
     function logResult(result) {
-      console.log(result);
+	console.log(result);
     }
     function logError(error) {
       console.log('Looks like there was a problem: \n', error);
@@ -160,7 +209,6 @@ td {
       } else {
 	datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
       }    
-
       document.getElementById('name').innerHTML = datetime;
 	    
       // Parse text and create keys
@@ -170,14 +218,12 @@ td {
       // Insert text into table
       for (var i = 0; i < 5; i++){
       	document.getElementById(id[i]).innerHTML = obj["Time Series (1min)"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
-
       }
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
       var fs = require("fs");
       var fileContent = "hello";
-
       fs.writeFile("cache.json", fileContent, (err) => {
       if (err) {
         console.error(err);
@@ -197,66 +243,16 @@ td {
 	  
 	//  https://www.quora.com/How-can-I-implement-a-search-engine-for-a-static-website-in-JavaScript
     
-    function getTicker(){
-      var ticker= document.getElementById('ticker').value;
-      alert("You typed: " + ticker);
-      document.getElementById('symbol').textContent = ticker;
+    function getTicker(input){
+      var ticker=input.value
+      // alert("You typed: " + ticker);
+      document.getElementById("symbol").innerHTML = ticker;
       // document.write(ticker);
       
       fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH');
     }	  
 </script>	
-</head>
-	
-<body>
-	
-<div class="flex-container">
-<header>
-  <h1>Toronto Stock Evaluator - API Testing</h1>
-  <p id = "test">By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
-</header>
-
-<article class="article">
-	
-<p id = 'symbol'></p>
-<p id = 'name'></p>
-
-<table style="width: 100px">
-  <tr>
-    <td>Open</td>
-    <td id = 'open'></td>
-  </tr>
-  <tr>
-    <td>High</td>
-    <td id = 'high'></td>
-  </tr>
-  <tr>
-    <td>Low</td>
-    <td id = 'low'></td>
-  </tr>
-  <tr>
-    <td>Close</td>
-    <td id = 'close'></td>
-  </tr>
-  <tr>
-    <td>Volume</td>
-    <td id = 'volume'></td>
-  </tr>
-</table>
-
-</article>
-	
-<div class="topnav">
-  <a href="index">Home</a>
-  <a href="quote_lookup">Quote Lookup</a>
-  <a href="biggest_gains">Biggest Gains</a>
-  <a href="top_choices">Top Choices</a>
-  <a class="active" href="api_testing">API Testing</a>
-  <div class="search-container">
-    <form>
-      <input type="text" placeholder="Search.." name="search" method="put" id="ticker">
-      <button type="submit" onclick="getTicker()">  <i class="fa fa-search"></i> </button>
     </form>
   </div>
 </div>
@@ -266,4 +262,3 @@ td {
 
 </body>
 </html>
-
