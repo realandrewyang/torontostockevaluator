@@ -168,9 +168,11 @@ td {
       var id = ['open', 'high', 'low', 'close', 'volume'];
       
       // Insert text into table
+	while (true){
       for (var i = 0; i < 5; i++){
       	document.getElementById(id[i]).innerHTML = obj["Time Series (1min)"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
       }
+	}
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
