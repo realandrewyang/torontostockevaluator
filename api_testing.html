@@ -93,6 +93,7 @@ td {
 </style>
 
 <script>
+
     function addZero(num){
       var ret = num.toString();
       if (num < 10){
@@ -195,10 +196,12 @@ td {
 	//  https://www.quora.com/How-can-I-implement-a-search-engine-for-a-static-website-in-JavaScript
     
     function getTicker(form){
-      var ticker = document.getElementById('ticker').value;
-      document.getElementById('symbol').innerHTML = ticker;
+      var ticker = form.inputbox.value;
+      var ticker1= document.getElementById('ticker').value;
+      alert("You typed: " + ticker);
+      document.getElementById('test').innerHTML = ticker;
       
-      fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
+      fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker1
 	      + '&interval=1min&apikey=4IZG324QO46F99VH');
     }	  
 </script>	
