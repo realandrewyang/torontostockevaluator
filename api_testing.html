@@ -200,7 +200,7 @@ td {
     function getTicker(){
       var ticker= document.getElementById('ticker').value;
       alert("You typed: " + ticker);
-      document.getElementById('test').innerHTML = ticker;
+      document.getElementById('symbol').textContent = ticker;
       document.write(ticker);
       
       fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
