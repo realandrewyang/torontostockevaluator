@@ -170,6 +170,9 @@ td {
       // Insert text into table
       for (var i = 0; i < 5; i++){
       	document.getElementById(id[i]).innerHTML = obj["Time Series (1min)"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
+	console.log(open);
+	console.log("hello");
+	console.log(high);
       }
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
@@ -185,14 +188,13 @@ td {
       console.log("File has been created");
       });
     }
+	
     function fetchText(pathToResource) {
-	while (true){
       fetch(pathToResource)
       .then(validateResponse)
       .then(readResponseAsText)
       .then(showText)
       .catch(logError);
-	}
     }
 	  
 	//  https://www.quora.com/How-can-I-implement-a-search-engine-for-a-static-website-in-JavaScript
