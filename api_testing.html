@@ -105,9 +105,10 @@ td {
   <a class="active" href="api_testing">API Testing</a>
   <div class="search-container">
     <form>
+      <button type="submit" onclick=getTicker(this)>
       <input type="text" placeholder="Search.." name="search" method="put" id="ticker">
 	    <!--<input type="text" placeholder="Search.." name="search" onkeyup=getTicker(this) method="put" id="ticker">-->
-      <input type="submit" onclick=getTicker(ticker)>
+      <i class="fa fa-search"></i></button>
     	<script src = "retrieveAPI.js">
     
 	</script>	
