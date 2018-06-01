@@ -1,4 +1,15 @@
-   function addZero(num){
+    function checkTicker(ticker){
+        var obj = JSON.parse(fetch("stockTickers.json"));
+
+        for (var t in obj){
+            if (t == ticker){
+                return obj[t];
+            }
+        }
+
+        return "Invalid ticker.";
+    }
+    function addZero(num){
 		var ret = num.toString();
    	if (num < 10){
   	    ret = "0" + num.toString();
