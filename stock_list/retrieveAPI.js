@@ -2,7 +2,7 @@
         var obj = fetch("stock_list/stockTickers.json");
 
         for (var t in obj){
-            if (t == ticker){
+            if (t.Key == ticker){
                 return obj[t];
             }
         }
