@@ -1,5 +1,7 @@
     function checkTicker(ticker){
         var obj = fetch("stock_list/stockTickers.json");
+	    
+	document.write(obj);
 
         for (var t in obj){
             if (t.Key == ticker){
