@@ -4,8 +4,9 @@
       .then(text => checkTicker(text, ticker))
     }
     function checkTicker(text, ticker){
-
-        for (var t in text){
+        var dict = JSON.parse(text);
+	    
+        for (var t in dict){
             if (t.Key == ticker){
 		document.getElementById("name").innerHTML = obj[t];
                 return;
