@@ -109,13 +109,18 @@
 	  
     
     function getTicker(input){
-      var ticker=input.value
+      var ticker=input.value;
+      var msg = checkTicker(input.value);
+	    
+      if (msg != "Invalid ticker."){
+             fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
+	      + '&interval=1min&apikey=4IZG324QO46F99VH'); 
+      }
       // alert("You typed: " + ticker);
       document.getElementById("symbol").innerHTML = ticker;
       // document.write(ticker);
       
-      fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
-	      + '&interval=1min&apikey=4IZG324QO46F99VH');
+      document.getElementById("name").innerHTML = msg;
     }	  
 
 
