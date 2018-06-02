@@ -1,5 +1,10 @@
+    function check(tickerSource){      
+      fetch(tickerSource)
+      .then(response => response.text())
+      .then(text => console.log(text))
+    }
     function checkTicker(ticker){
-        var obj = fetch("stock_list/stockTickers.json");
+        var obj = check("stock_list/stockTickers.json");
 	    
 	document.write(obj);
 
