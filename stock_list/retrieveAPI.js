@@ -8,7 +8,8 @@
 	    
         for (var t in dict){
             if (t.Key == ticker){
-		document.getElementById("name").innerHTML = obj[t];
+		document.getElementById("name").innerHTML = dict[t];
+		console.log(dict[t]);
                 return;
             }
         }
