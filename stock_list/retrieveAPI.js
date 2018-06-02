@@ -1,5 +1,5 @@
     function checkTicker(ticker){
-        var obj = fetch("stockTickers.json");
+        var obj = fetch("stock_list/stockTickers.json");
 
         for (var t in obj){
             if (t == ticker){
