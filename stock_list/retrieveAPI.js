@@ -10,12 +10,12 @@
             if (t.Key == ticker){
 		document.getElementById("name").innerHTML = dict[t];
 		console.log(dict[t]);
-                return;
+                return true;
             }
         }
 
         document.getElementById("name").innerHTML = "Invalid ticker.";
-	return;
+	return false;
     }
     function addZero(num){
 		var ret = num.toString();
@@ -120,9 +120,8 @@
       var ticker=input.value;
 	    
       document.getElementById("symbol").innerHTML = ticker;
-      check("stock_list/stockTickers.json", input.value);
 	    
-      if (document.getElementById("name").innerHTML != "Invalid ticker."){
+      if (check("stock_list/stockTickers.json", input.value) == true){
              fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH'); 
       }
