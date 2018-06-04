@@ -83,7 +83,7 @@
       } else {
 	datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
       }    
-      document.getElementById('name').innerHTML = datetime;
+      // document.getElementById('name').innerHTML = datetime;
 	    
       // Parse text and create keys
       var obj = JSON.parse(responseAsText);
