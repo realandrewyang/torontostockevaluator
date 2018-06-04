@@ -125,7 +125,6 @@
              fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH'); 
       }
-      // alert("You typed: " + ticker);
       
       // document.write(ticker);
     }	  
@@ -157,6 +156,107 @@
 	alert(str);
 	    
     }
+
+
+   
+     function showWeeklyText(responseAsText) {
+	    
+	      // Get current date
+	      var datetime = "";
+	      var currentdate = new Date();
+	      var year = parseInt(currentdate.getFullYear());
+	      var month = parseInt(currentdate.getMonth()) + 1;
+	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	      var date = parseInt(currentdate.getDate());
+	      var hour = parseInt(currentdate.getHours());
+	      var minute = parseInt(currentdate.getMinutes());
+
+	      // Check if market is currently closed
+	      if (hour * 60 + minute > 16 * 60){
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
+
+	      // Use previous day if market will open later in the day
+	      } else if (hour < 9){
+
+		// Beginning of the month exception
+		if (currentdate == 1){
+
+		  // January 1st exception
+		  if (month == 1){
+		    year--;
+		    month = 12;
+		  } else {
+		    month--;
+		  }
+
+		  // Set date to the last day of the previous month
+		  date = monthLength[month - 2];
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
+		} else {
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";
+		}
+
+	      // Final case where the stock market is open
+	      } else {
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
+	      }    
+	      // document.getElementById('name').innerHTML = datetime;
+
+	      // Parse text and create keys
+	      var obj = JSON.parse(responseAsText);
+	      var id = ['open', 'high', 'low', 'close', 'volume'];
+	      var open = [];
+	      var high = [];
+	      var low = [];
+	      var close = [];
+	      var volume = [];
+
+	      // Insert text into table
+	     for (var j = 0; j < 25; j++) {
+		      for (var i = 0; i < 5; i++){
+			document.getElementById(id[i]).innerHTML = obj["Weekly Time Series"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
+		      
+		      }
+		     open.push(id[0]);
+		     high.push(id[1]);
+		     low.push(id[2]);
+		     close.push(id[3]);
+		     volume.push(id[4]);
+		     
+		     //testing to see if it works
+		     console.log(open[j]);
+		     console.log(high[j]);
+		     console.log(low[j]);
+		     console.log(close[j]);
+		     console.log(volume[j]);
+	     }
+	      // document.getElementById('symbol').innerHTML = "MSFT";
+    }
+
+
+
+
+
+    function fetchHistoricalData(pathToResource) {
+	      fetch(pathToResource)
+	      .then(validateResponse)
+	      .then(readResponseAsText)
+	      .then(showWeeklyText)
+	      .catch(logError);
+    }
+
+    function getWeeklyTicker(input){
+	      var ticker=input.value;
+
+	      document.getElementById("symbol").innerHTML = ticker;
+
+	      if (check("stock_list/stockTickers.json", input.value) == true){
+		     fetchHistoricalData('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + ticker
+		      + '&apikey=4IZG324QO46F99VH'); 
+	      }
+    }	  
+
+
 
 ////////////////////////////////////////////////////
 /**
