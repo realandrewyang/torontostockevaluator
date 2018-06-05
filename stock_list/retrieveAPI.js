@@ -215,10 +215,13 @@
 
 	      // Insert text into table
 	     for (var j = 0; j < 25; j++) {
-		      for (var i = 0; i < 5; i++){
-			document.getElementById(id[i]).innerHTML = obj["Weekly Time Series"][datetime][String.fromCharCode(i + 49) + '. ' + id[i]];
-		      
-		      }
+		     
+		    document.getElementById(id[0]).innerHTML = obj["Weekly Time Series"][datetime]['1. open'];
+		    document.getElementById(id[1]).innerHTML = obj["Weekly Time Series"][datetime]['2. high'];
+		    document.getElementById(id[2]).innerHTML = obj["Weekly Time Series"][datetime]['3. low'];
+		    document.getElementById(id[3]).innerHTML = obj["Weekly Time Series"][datetime]['4. close'];
+		    document.getElementById(id[4]).innerHTML = obj["Weekly Time Series"][datetime]['5. volume'];
+		   
 		     open.push(id[0]);
 		     high.push(id[1]);
 		     low.push(id[2]);
@@ -232,7 +235,7 @@
 		     console.log(close[j]);
 		     console.log(volume[j]);
 	     }
-	      // document.getElementById('symbol').innerHTML = "MSFT";
+	     
     }
 
 
