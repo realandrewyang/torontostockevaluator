@@ -1,7 +1,8 @@
 def addRest(a):
     returnValue = ""
-    for i in range(1, len(a)):
-        returnValue += a[i]
+    for i in range(1, len(a) - 1):
+        returnValue +=  a[i] + " "
+    returnValue+= a[len(a) - 1]
     return returnValue
 
 readFile = open("stock.txt", "r")
