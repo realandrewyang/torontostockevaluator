@@ -91,9 +91,30 @@ footer {background: #aaa;color:white;}
   cursor: pointer;
 }
 
+.topnav .search-container {
+  float: right;
+}
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
 .topnav .search-container button:hover {
   background: #ccc;
 }
+	
+	
 </style>
 </head>
 <body>
@@ -105,9 +126,12 @@ footer {background: #aaa;color:white;}
   <a href="top_choices">Top Choices</a>
   <a href="api_testing">API Testing</a>
   <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+    <form>
+      <input type="text" onkeyup=getWeeklyTicker(this) placeholder="Search Ticker" name="search" method="put" id="ticker">
+    	
+	<script src = "stock_list/retrieveAPI.js">
+	</script>
+	    
     </form>
   </div>
 </div>
@@ -117,6 +141,7 @@ footer {background: #aaa;color:white;}
   <h1>Toronto Stock Evaluator - Biggest Gains</h1>
   <p>By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
 </header>
+	
 
 <article class="article">
 	<p>The Toronto Stock Evaluator provides real-time data analysis concerning the
