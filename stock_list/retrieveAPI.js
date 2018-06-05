@@ -123,7 +123,7 @@
 	    
       document.getElementById("symbol").innerHTML = ticker;
 	    
-      if (check("stock_list/stockTickers.json", input.value) == true){
+      if (checkTicker("stock_list/stockTickers.json", input.value) == true){
              fetchText('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH'); 
       }
