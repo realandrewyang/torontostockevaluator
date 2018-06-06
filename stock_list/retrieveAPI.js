@@ -15,6 +15,13 @@
         }
 
         document.getElementById("name").innerHTML = "Invalid ticker.";
+	    
+	// Reset to N/A
+	var id = ["open", "high", "low", "close", "volume"];
+	for (var i = 0; i < 5; i++){
+	    document.getElementById(id[i]).innerHTML = "N/A";
+	}
+	    
 	return false;
     }
     function addZero(num){
