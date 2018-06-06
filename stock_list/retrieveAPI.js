@@ -206,25 +206,25 @@
 	      var obj = JSON.parse(responseAsText);
 	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
 	      
-	      var open = [], oTemp = {};
-	      var high = [], hTemp = {};
-	      var low = [], lTemp = {};
-	      var close = [], cTemp = {};
-	      var volume = [], vTemp = {};
+	      var open = [], oTemp = 0;
+	      var high = [], hTemp = 0;
+	      var low = [], lTemp = 0;
+	      var close = [], cTemp = 0;
+	      var volume = [], vTemp = 0;
 
 	      // Insert text into table
 	     for (var j = 0; j < 25; j++) {
 		     
 		   // document.getElementById('open').innerHTML
-		    oTemp = obj["Weekly Time Series"][datetime]['1. open'];
+		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
 		    //document.getElementById('high').innerHTML = 
-		    hTemp = obj["Weekly Time Series"][datetime]['2. high'];
+		    hTemp = parseInt(obj["Weekly Time Series"][datetime]['2. high']);
 		    //document.getElementById('low').innerHTML = 
-	            lTemp = obj["Weekly Time Series"][datetime]['3. low'];
+	            lTemp = parseInt(obj["Weekly Time Series"][datetime]['3. low']);
 		   // document.getElementById('close').innerHTML 
-		    cTemp = obj["Weekly Time Series"][datetime]['4. close'];
+		    cTemp = parseInt(["Weekly Time Series"][datetime]['4. close']);
 		 //   document.getElementById('volume').innerHTML 
-		    vTemp = obj["Weekly Time Series"][datetime]['5. volume'];
+		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
 		   
 		     open.push(oTemp);
 		     high.push(hTemp);
