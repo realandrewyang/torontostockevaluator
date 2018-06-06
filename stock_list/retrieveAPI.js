@@ -241,7 +241,7 @@
 		     
 		     document.write(open[j]);
 	     }
-	     
+	     document.getElementById('open').innerHTML = open[0];
 	     
     }
 
