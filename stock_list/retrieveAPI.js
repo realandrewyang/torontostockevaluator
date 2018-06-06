@@ -15,13 +15,6 @@
         }
 
         document.getElementById("name").innerHTML = "Invalid ticker.";
-	    
-	// Reset to N/A
-	var id = ["open", "high", "low", "close", "volume"];
-	for (var i = 0; i < 5; i++){
-	    document.getElementById(id[i]).innerHTML = "N/A";
-	}
-	    
 	return false;
     }
     function addZero(num){
@@ -211,7 +204,8 @@
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
-	      var id = ['open', 'high', 'low', 'close', 'volume'];
+	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
+	      
 	      var open = [];
 	      var high = [];
 	      var low = [];
@@ -221,17 +215,22 @@
 	      // Insert text into table
 	     for (var j = 0; j < 25; j++) {
 		     
-		    document.getElementById(id[0]).innerHTML = obj["Weekly Time Series"][datetime]['1. open'];
-		    document.getElementById(id[1]).innerHTML = obj["Weekly Time Series"][datetime]['2. high'];
-		    document.getElementById(id[2]).innerHTML = obj["Weekly Time Series"][datetime]['3. low'];
-		    document.getElementById(id[3]).innerHTML = obj["Weekly Time Series"][datetime]['4. close'];
-		    document.getElementById(id[4]).innerHTML = obj["Weekly Time Series"][datetime]['5. volume'];
+		   // document.getElementById('open').innerHTML
+		    open.push(obj["Weekly Time Series"][datetime]['1. open']);
+		    //document.getElementById('high').innerHTML = 
+		    high.push(obj["Weekly Time Series"][datetime]['2. high']);
+		    //document.getElementById('low').innerHTML = 
+	            low.push(obj["Weekly Time Series"][datetime]['3. low']);
+		   // document.getElementById('close').innerHTML 
+		    close.push(obj["Weekly Time Series"][datetime]['4. close']);
+		 //   document.getElementById('volume').innerHTML 
+		    volume.push(obj["Weekly Time Series"][datetime]['5. volume']);
 		   
-		     open.push(id[0]);
-		     high.push(id[1]);
-		     low.push(id[2]);
-		     close.push(id[3]);
-		     volume.push(id[4]);
+		     open.push('open');
+		     high.push('high');
+		     low.push('low');
+		     close.push('close');
+		     volume.push('volume');
 		     
 		     //testing to see if it works
 		     console.log(open[j]);
