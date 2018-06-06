@@ -114,6 +114,16 @@ footer {background: #aaa;color:white;}
   background: #ccc;
 }
 	
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+td {
+    border: 2px solid black;
+    text-align: center;
+    padding: 8px;
+}
+	
 	
 </style>
 </head>
@@ -144,6 +154,7 @@ footer {background: #aaa;color:white;}
   <p>By Andrew Yang, Filip Stojanovic & Graeme Ferguson</p>
 </header>
 
+	
 <ul>
 	<li id = 'open'>
 	</li>
@@ -151,6 +162,12 @@ footer {background: #aaa;color:white;}
 </ul>
 
 <article class="article">
+
+  <table style="width: 100px">
+    <tr>
+    <td>Open</td>
+    <td id = 'open'></td>
+  </tr>
 	<p>The Toronto Stock Evaluator provides real-time data analysis concerning the
     Toronto Stock Exchange.</p>
 </article>
