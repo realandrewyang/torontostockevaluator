@@ -226,11 +226,11 @@
 		 //   document.getElementById('volume').innerHTML 
 		    volume.push(obj["Weekly Time Series"][datetime]['5. volume']);
 		   
-		     open.push('open');
-		     high.push('high');
-		     low.push('low');
-		     close.push('close');
-		     volume.push('volume');
+		  //   open.push('open');
+		 //    high.push('high');
+		   //  low.push('low');
+		   //  close.push('close');
+		   //  volume.push('volume');
 		     
 		     //testing to see if it works
 		     console.log(open[j]);
@@ -241,6 +241,7 @@
 		     
 		     document.write(open[j]);
 	     }
+	     
 	     
     }
 
