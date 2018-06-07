@@ -96,7 +96,13 @@
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
+      var fs = fopen("cache.json", 3);
 
+      if (fs != -1){
+      	fwrite(fs, responseAsText);
+      }
+      
+      fclose(fs);
     }
 	
     function fetchText(pathToResource) {
@@ -150,9 +156,7 @@
     }
 
 
-   
-     function showWeeklyText(responseAsText) {
-	    
+    function getTime() {    
 	      // Get current date
 	      var datetime = "";
 	      var currentdate = new Date();
@@ -192,7 +196,16 @@
 	      } else {
 		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
 	      }    
-	      // document.getElementById('name').innerHTML = datetime;
+	    return datetime;
+    }
+
+
+   
+     function showWeeklyText(responseAsText) {
+	    
+	      // Get date with getTime()
+	      var datetime = getTime();
+	     
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
@@ -231,14 +244,10 @@
 		     console.log(close[j]);
 		     console.log(volume[j]);
 		     
-		     document.write(open[j]);
 	     }
 	     document.getElementById('open').innerHTML = open[0];
 	     
     }
-
-
-
 
 
     function fetchHistoricalData(pathToResource) {
@@ -259,6 +268,50 @@
 		      + '&apikey=4IZG324QO46F99VH'); 
 	      }
     }	  
+
+
+     function showMovingAverage(responseAsText) {
+	    
+	      // Get date with getTime()
+	      var datetime = getTime();
+	     
+
+	      // Parse text and create keys
+	      var obj = JSON.parse(responseAsText);
+	      
+	      var MA = [], MATemp = 0;
+
+	      // Insert text into table
+	     for (var j = 0; j < 25; j++) {
+		     
+		   // document.getElementById('open').innerHTML
+		    MATemp = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+		   
+		    MA.push(MATemp);
+		     
+	     }
+	     document.getElementById('ma').innerHTML = open[0];
+	     
+    }
+
+
+
+    function fetchMovingAverage(pathToResource) {
+	      fetch(pathToResource)
+	      .then(validateResponse)
+	      .then(readResponseAsText)
+	      .then(showMovingAverage)
+	      .catch(logError);
+    }
+
+	function getMovingAverage(input){
+		var ticker = input.value;
+		
+		if (check("stock_list/stockTickers.json", input.value) == true){
+			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			+ '&interval=weekly&time_period=10&series_type=close&apikey=4IZG324QO46F99VH');	
+		}
+}
 
 
 
