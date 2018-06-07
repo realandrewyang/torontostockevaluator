@@ -96,15 +96,13 @@
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
-      var fs = require("fs");
-      var fileContent = "hello";
-      fs.writeFile("cache.json", fileContent, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      };
-      console.log("File has been created");
-      });
+      var fs = fopen("cache.json", 3);
+
+      if (fs != -1){
+      	fwrite(fs, responseAsText);
+      }
+      
+      fclose(fs):
     }
 	
     function fetchText(pathToResource) {
