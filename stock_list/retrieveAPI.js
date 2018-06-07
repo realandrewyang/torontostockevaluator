@@ -102,7 +102,7 @@
       	fwrite(fs, responseAsText);
       }
       
-      fclose(fs):
+      fclose(fs);
     }
 	
     function fetchText(pathToResource) {
