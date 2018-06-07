@@ -96,13 +96,7 @@
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
-      var fs = fopen("cache.json", 3);
 
-      if (fs != -1){
-      	fwrite(fs, responseAsText);
-      }
-      
-      fclose(fs);
     }
 	
     function fetchText(pathToResource) {
