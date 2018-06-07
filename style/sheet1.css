@@ -88,13 +88,3 @@ footer {background: #aaa;color:white;}
 .topnav .search-container button:hover {
   background: #ccc;
 }
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-}
-td {
-    border: 2px solid black;
-    text-align: center;
-    padding: 8px;
-}
