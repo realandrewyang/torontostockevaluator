@@ -199,9 +199,18 @@
 	    return datetime;
     }
 
+     function getObj(responseAsText) {
+	     //get date with getTime()
+	     var datetime = getTime();
+	     
+	     var obj = JSON.parse(responseAsText);
+	     var data = obj["Weekly Time Series"][datetime];
+	     
+     }
+
 
    
-     function showWeeklyText(responseAsText) {
+     function showWeeklyText(responseAsText, open, high, low, close, volume) {
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
@@ -211,14 +220,20 @@
 	      var obj = JSON.parse(responseAsText);
 	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
 	      
-	      var open = [], oTemp = 0;
-	      var high = [], hTemp = 0;
-	      var low = [], lTemp = 0;
-	      var close = [], cTemp = 0;
-	      var volume = [], vTemp = 0;
+	     
+	     // var open = [],
+	      var oTemp = 0;
+	     // var high = [], 
+	      var hTemp = 0;
+	      //var low = []
+	      var lTemp = 0;
+	      //var close = [], 
+	      var cTemp = 0;
+	    //  var volume = [], 
+	      var vTemp = 0;
 
 	      // Insert text into table
-	     for (var j = 0; j < 25; j++) {
+	  //   for (var j = 0; j < 25; j++) {
 		     
 		   // document.getElementById('open').innerHTML
 		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
@@ -238,27 +253,38 @@
 		     volume.push(vTemp);
 		     
 		     //testing to see if it works
-		     console.log(open[j]);
-		     console.log(high[j]);
-		     console.log(low[j]);
-		     console.log(close[j]);
-		     console.log(volume[j]);
+		     console.log(open);
+		     console.log(high);
+		     console.log(low);
+		     console.log(close);
+		     console.log(volume);
 		     
-	     }
+	//     }     
+    }
+
+    function displayData(open, high, low, close, volume) {
+    	     
 	     document.getElementById('open').innerHTML = open[0];
 	     document.getElementById('high').innerHTML = high[0];
 	     document.getElementById('low').innerHTML = low[0];
 	     document.getElementById('close').innerHTML = close[0];
-	     document.getElementById('volume').innerHTML = volume[0];
-	     
+	     document.getElementbyId('volume').innerHTML = volume[0];
+    
     }
 
-
     function fetchHistoricalData(pathToResource) {
+	      var open = [];
+	      var high = [];
+	      var low = [];
+	      var close = [];
+	      var volume = [];
+	    
 	      fetch(pathToResource)
 	      .then(validateResponse)
 	      .then(readResponseAsText)
-	      .then(showWeeklyText)
+	      .then(getObj)
+	      .then(data.forEach(showWeeklyText))
+	      .then(displayData)
 	      .catch(logError);
     }
 
