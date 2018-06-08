@@ -137,7 +137,7 @@ td {
   <a href="api_testing">API Testing</a>
   <div class="search-container">
     <form>
-      <input type="text" onkeyup=getWeeklyTicker(this) placeholder="Search Ticker" name="search" method="put" id="ticker">
+      <input type="text" onkeyup="getWeeklyTicker(this);getMovingAverage(this)" placeholder="Search Ticker" name="search" method="put" id="ticker">
     	
 	<script src = "stock_list/retrieveAPI.js">
 	</script>
