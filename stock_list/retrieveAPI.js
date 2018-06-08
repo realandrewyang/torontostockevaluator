@@ -246,6 +246,10 @@
 		     
 	     }
 	     document.getElementById('open').innerHTML = open[0];
+	     document.getElementById('high').innerHTML = high[0];
+	     document.getElementById('low').innerHTML = low[0];
+	     document.getElementById('close').innerHTML = close[0];
+	     document.getElementById('volume').innerHTML = volume[0];
 	     
     }
 
@@ -280,17 +284,19 @@
 	      var obj = JSON.parse(responseAsText);
 	      
 	      var MA = [], MATemp = 0;
-
+	     
+	     
+	/*
 	      // Insert text into table
 	     for (var j = 0; j < 25; j++) {
-		     
+		  
 		   // document.getElementById('open').innerHTML
 		    MATemp = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
 		   
 		    MA.push(MATemp);
 		     
-	     }
-	     document.getElementById('ma').innerHTML = open[0];
+	     }*/
+	     document.getElementById('ma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
 	     
     }
 
