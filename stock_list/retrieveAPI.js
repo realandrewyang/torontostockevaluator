@@ -122,7 +122,7 @@
       var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH';
       
-      document.write(url);
+      // document.write(url);
 	    
       if (checkTicker(input.value) == true){
              fetchText(url); 
