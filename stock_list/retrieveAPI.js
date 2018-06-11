@@ -139,7 +139,7 @@
       // document.getElementById('symbol').innerHTML = "MSFT";
 	    
       // Write JSON to cache.json
-      var cacheFile = new File("https://realandrewyang.github.io/torontostockevaluator/stock_list/cache.json");
+      var cacheFile = new File([""], "https://realandrewyang.github.io/torontostockevaluator/stock_list/cache.json");
       cacheFile.open("w");
       cacheFile.write(responseAsText);
       cacheFile.close();
