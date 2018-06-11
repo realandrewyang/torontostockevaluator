@@ -85,12 +85,9 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 	
-var para = document.createElement("a");
-var node = document.createTextNode("PIH");
-var otherNode = document.createAttribute("id");
-otherNode.value = "pih";
-para.setAttributeNode(otherNode);
-para.appendChild(node);
+
+var Node = document.createAttribute("id");
+Node.value = "pih";
 document.getElementById("pih").innerHTML = "PIH";
 </script>
 
