@@ -24,6 +24,41 @@
         }
         return ret;
     }
+    function wrapWeekend(someDate){
+      
+      // Get current date
+      var retValue;
+      var year = parseInt(someDate.getFullYear());
+      var month = parseInt(someDate.getMonth()) + 1;
+      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      var date = parseInt(someDate.getDate());
+      var adjust = 0;
+	    
+      if (someDate.getDay() == 0){
+        adjust = 2;
+      } else if (date.getDay() == 6){
+        adjust = 1;
+      }
+      
+      // Check if the month starts on a weekend
+      if (someDate.getDate() - adjust < 1){
+	
+	// Check if the year starts on a weekend
+        if (month - 1 < 1){
+	  year--;
+	  month = 12;
+	  date = 31 + (date - adjust);
+	} else {
+	  month--;
+	  date = monthLength[month - 1] + (date - adjust);
+	}
+      } else {
+        date -= adjust;
+      }
+	    
+      retValue = new Date(year, month, date, parseInt(someDate.getHours()), parseInt(someDate.getMinutes()), parseInt(someDate.getSeconds());
+      return retValue;
+    }
     function logResult(result) {
 	console.log(result);
     }
@@ -47,6 +82,14 @@
       // Get current date
       var datetime = "";
       var currentdate = new Date();
+      var isWeekend = false;
+
+      // If it's a weekend
+      if (currentdate.getDay() == 0 || currentdate.getDay() == 6){
+	currentdate = wrapWeekend(datetime);
+	isWeekend = true;
+      }
+
       var year = parseInt(currentdate.getFullYear());
       var month = parseInt(currentdate.getMonth()) + 1;
       var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -59,7 +102,7 @@
         datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
       
       // Use previous day if market will open later in the day
-      } else if (hour < 9){
+      } else if (hour < 9 && !isWeekend){
 	      
 	// Beginning of the month exception
         if (currentdate == 1){
