@@ -56,7 +56,7 @@
         date -= adjust;
       }
 	    
-      retValue = new Date(year, month, date, parseInt(someDate.getHours()), parseInt(someDate.getMinutes()), parseInt(someDate.getSeconds());
+      retValue = new Date(year, month, date, parseInt(someDate.getHours()), parseInt(someDate.getMinutes()), parseInt(someDate.getSeconds()));
       return retValue;
     }
     function logResult(result) {
