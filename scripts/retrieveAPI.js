@@ -385,10 +385,19 @@
 		
 		if (check("stock_list/stockTickers.json", input.value) == true){
 			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
-			+ '&interval=weekly&time_period=10&series_type=close&apikey=4IZG324QO46F99VH');	
+			+ '&interval=daily&time_period=50&series_type=close&apikey=4IZG324QO46F99VH');	
 		}
 }
 
+
+	function getMovingAverageLong(input){
+		var ticker = input.value;
+		
+		if (check("stock_list/stockTickers.json", input.value) == true){
+			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
+		}
+}
 
 
 ////////////////////////////////////////////////////
