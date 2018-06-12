@@ -343,6 +343,7 @@
 	      }
     }	  
 
+//50 day moving average
 
      function showMovingAverage(responseAsText) {
 	    
@@ -390,11 +391,39 @@
 }
 
 
+//200 day moving average
+     function showMovingAverageLong(responseAsText) {
+	    
+	      // Get date with getTime()
+	      var datetime = getTime();
+	     
+
+	      // Parse text and create keys
+	      var obj = JSON.parse(responseAsText);
+	      
+	      var LMA = [], LMATemp = 0;
+	     
+	     
+	     document.getElementById('lma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     
+    }
+
+    function fetchMovingAverageLong(pathToResource) {
+	      fetch(pathToResource)
+	      .then(validateResponse)
+	      .then(readResponseAsText)
+	      .then(showMovingAverageLong)
+	      .catch(logError);
+    }
+
+
+
+
 	function getMovingAverageLong(input){
 		var ticker = input.value;
 		
 		if (check("stock_list/stockTickers.json", input.value) == true){
-			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			fetchMovingAverageLong('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
 			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
 		}
 }
