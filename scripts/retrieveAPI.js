@@ -162,7 +162,7 @@
       var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
 	      + '&interval=1min&apikey=4IZG324QO46F99VH';
       
-      // document.write(url);
+      //document.write(url);
 	    
       if (checkTicker(input.value) == true){
              fetchText(url); 
@@ -243,8 +243,6 @@
 	    return datetime;
     }
 
-
-/*
      function getObj(responseAsText) {
 	     //get date with getTime()
 	     var datetime = getTime();
@@ -252,20 +250,20 @@
 	     var obj = JSON.parse(responseAsText);
 	     var data = obj["Weekly Time Series"][datetime];
 	     
-     }*/
+     }
 
 
-    //variable for valuation purposes
-    var curClose = 0;
    
-     function showWeeklyText(responseAsText) {
+     function showWeeklyText(responseAsText, open, high, low, close, volume) {
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
 	     
 
 	      // Parse text and create keys
-	      var obj = JSON.parse(responseAsText);	      
+	      var obj = JSON.parse(responseAsText);
+	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
+	      
 	     
 	     // var open = [],
 	      var oTemp = 0;
@@ -278,7 +276,9 @@
 	    //  var volume = [], 
 	      var vTemp = 0;
 
-
+	      // Insert text into table
+	  //   for (var j = 0; j < 25; j++) {
+		     
 		   // document.getElementById('open').innerHTML
 		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
 		    //document.getElementById('high').innerHTML = 
@@ -289,30 +289,23 @@
 		    cTemp = parseInt(["Weekly Time Series"][datetime]['4. close']);
 		 //   document.getElementById('volume').innerHTML 
 		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
-		  
-	     	    curClose = cTemp;
-	     
-		    /* open.push(oTemp);
+		   
+		     open.push(oTemp);
 		     high.push(hTemp);
 		     low.push(lTemp);
 		     close.push(cTemp);
-		     volume.push(vTemp);*/
+		     volume.push(vTemp);
 		     
 		     //testing to see if it works
-		   /*  console.log(open);
+		     console.log(open);
 		     console.log(high);
 		     console.log(low);
 		     console.log(close);
-		     console.log(volume);*/
-	     
-		     document.getElementById('open').innerHTML = oTemp;
-		     document.getElementById('high').innerHTML = hTemp;
-		     document.getElementById('low').innerHTML = lTemp;
-		     document.getElementById('close').innerHTML = cTemp;
-		     document.getElementbyId('volume').innerHTML = vTemp; 	    
-	        
+		     console.log(volume);
+		     
+	//     }     
     }
-/*
+
     function displayData(open, high, low, close, volume) {
     	     
 	     document.getElementById('open').innerHTML = open[0];
@@ -321,14 +314,21 @@
 	     document.getElementById('close').innerHTML = close[0];
 	     document.getElementbyId('volume').innerHTML = volume[0];
     
-    }*/
+    }
 
     function fetchHistoricalData(pathToResource) {
+	      var open = [];
+	      var high = [];
+	      var low = [];
+	      var close = [];
+	      var volume = [];
 	    
 	      fetch(pathToResource)
 	      .then(validateResponse)
 	      .then(readResponseAsText)
-	      .then(showWeeklyText)
+	      .then(getObj)
+	      .then(data.forEach(showWeeklyText))
+	      .then(displayData)
 	      .catch(logError);
     }
 
@@ -343,12 +343,6 @@
 	      }
     }	  
 
-//moving average valuation
-var maShort = 0;
-var maLong = 0;
-var lastMAshort = 0;
-var lastMAlong = 0;
-
 //50 day moving average
 
      function showMovingAverage(responseAsText) {
@@ -359,6 +353,8 @@ var lastMAlong = 0;
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
+	      
+	      var MA = [], MATemp = 0;
 	     
 	     
 	/*
@@ -371,8 +367,8 @@ var lastMAlong = 0;
 		    MA.push(MATemp);
 		     
 	     }*/
-	     maShort = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
-	     document.getElementById('mas').innerHTML = maShort;
+	     document.getElementById('ma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     
     }
 
 
@@ -404,10 +400,11 @@ var lastMAlong = 0;
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
-
+	      
+	      var LMA = [], LMATemp = 0;
 	     
-	     maLong = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
-	     document.getElementById('mal').innerHTML = maLong;
+	     
+	     document.getElementById('lma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
 	     
     }
 
@@ -419,26 +416,18 @@ var lastMAlong = 0;
 	      .catch(logError);
     }
 
-     function getMovingAverageLong(input){
+
+
+
+	function getMovingAverageLong(input){
 		var ticker = input.value;
 		
 		if (checkTicker(input.value) == true){
 			fetchMovingAverageLong('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
 			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
 		}
-    }
+}
 
-
-//compare moving averagesw
-    function compareMovingAverages(input){
-	    if (curClose < maShort * 0.95) {
-	    	document.getElementById("evaluation").innerHTML = "recommended buy";
-	    }
-	    else {
-		document.getElementById("evaluation").innerHTML = "don't buy yet";
-	    }
-    }
-	
 
 ////////////////////////////////////////////////////
 /**
