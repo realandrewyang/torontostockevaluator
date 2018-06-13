@@ -242,7 +242,7 @@
 	      }    
 	    return datetime;
     }
-
+/*
      function getObj(responseAsText) {
 	     //get date with getTime()
 	     var datetime = getTime();
@@ -251,20 +251,20 @@
 	     var data = obj["Weekly Time Series"][datetime];
 	     
      }
+*/
 
+//global variables for valuation
+var curClose = 0;
 
-   
-     function showWeeklyText(responseAsText, open, high, low, close, volume) {
+     function showWeeklyText(responseAsText) {
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
-	     
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
 	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
-	      
-	     
+	           
 	     // var open = [],
 	      var oTemp = 0;
 	     // var high = [], 
@@ -290,22 +290,24 @@
 		 //   document.getElementById('volume').innerHTML 
 		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
 		   
-		     open.push(oTemp);
-		     high.push(hTemp);
-		     low.push(lTemp);
-		     close.push(cTemp);
-		     volume.push(vTemp);
-		     
 		     //testing to see if it works
-		     console.log(open);
-		     console.log(high);
-		     console.log(low);
-		     console.log(close);
-		     console.log(volume);
+		     console.log(oTemp);
+		     console.log(hTemp);
+		     console.log(lTemp);
+		     console.log(cTemp);
+		     console.log(vTemp);
+	     
+	     	     document.getElementById("open").innerHTML = oTemp;
+	  	     document.getElementById("high").innerHTML = hTemp;
+	  	     document.getElementById("low").innerHTML = lTemp;
+	   	     document.getElementById("close").innerHTML = cTemp;
+		     document.getElementbyId("volume").innerHTML = vTemp;
+	     
+	     	curClose = cTemp;
 		     
 	//     }     
     }
-
+/*
     function displayData(open, high, low, close, volume) {
     	     
 	     document.getElementById('open').innerHTML = open[0];
@@ -315,25 +317,19 @@
 	     document.getElementbyId('volume').innerHTML = volume[0];
     
     }
-
+*/
     function fetchHistoricalData(pathToResource) {
-	      var open = [];
-	      var high = [];
-	      var low = [];
-	      var close = [];
-	      var volume = [];
-	    
+
 	      fetch(pathToResource)
 	      .then(validateResponse)
 	      .then(readResponseAsText)
-	      .then(getObj)
-	      .then(data.forEach(showWeeklyText))
+	      .then(showWeeklyText)
 	      .then(displayData)
 	      .catch(logError);
     }
 
     function getWeeklyTicker(input){
-	      var ticker=input.value;
+	      var ticker= input.value;
 
 	      document.getElementById("symbol").innerHTML = ticker;
 
@@ -343,18 +339,23 @@
 	      }
     }	  
 
+//global MA variables for valuation
+var MAshort = 0;
+var MAlong = 0;
+var lastMAshort = 0;
+var lastMAlong = 0;
+
 //50 day moving average
 
      function showMovingAverage(responseAsText) {
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
-	     
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
 	      
-	      var MA = [], MATemp = 0;
+	//      var MA = [], MATemp = 0;
 	     
 	     
 	/*
@@ -367,7 +368,8 @@
 		    MA.push(MATemp);
 		     
 	     }*/
-	     document.getElementById('ma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     MAshort = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     document.getElementById("mas").innerHTML = MAshort;
 	     
     }
 
@@ -396,15 +398,14 @@
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
-	     
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
 	      
-	      var LMA = [], LMATemp = 0;
+	 //     var LMA = [], LMATemp = 0;
 	     
-	     
-	     document.getElementById('lma').innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     MAlong = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     document.getElementById("mal").innerHTML = MAlong;
 	     
     }
 
@@ -417,8 +418,6 @@
     }
 
 
-
-
 	function getMovingAverageLong(input){
 		var ticker = input.value;
 		
@@ -427,6 +426,17 @@
 			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
 		}
 }
+
+	
+	function valuate(){
+		if (MAshort * 0.95 > curClose) {
+			document.getElementById("evaluation").innerHTML = "recommended buy";
+		}
+		else {
+			document.getElementById("evaluation").innerHTML = "do nothing";
+		}
+	}
+
 
 
 ////////////////////////////////////////////////////
