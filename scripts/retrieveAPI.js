@@ -242,19 +242,55 @@
 	      }    
 	    return datetime;
     }
-/*
-     function getObj(responseAsText) {
-	     //get date with getTime()
-	     var datetime = getTime();
-	     
-	     var obj = JSON.parse(responseAsText);
-	     var data = obj["Weekly Time Series"][datetime];
-	     
-     }
-*/
+
+
+	function getLastDate() {    
+	      // Get yesterday's date
+	      var datetime = "";
+	      var currentdate = new Date();
+	      var year = parseInt(currentdate.getFullYear());
+	      var month = parseInt(currentdate.getMonth()) + 1;
+	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		//trying to edit the day here so that datetime contains yesterday's date
+	      var date = parseInt(currentdate.getDate()) -1;
+	      var hour = parseInt(currentdate.getHours());
+	      var minute = parseInt(currentdate.getMinutes());
+
+	      // Check if market is currently closed
+	      if (hour * 60 + minute > 16 * 60){
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
+
+	      // Use previous day if market will open later in the day
+	      } else if (hour < 9){
+
+		// Beginning of the month exception
+		if (currentdate == 1){
+
+		  // January 1st exception
+		  if (month == 1){
+		    year--;
+		    month = 12;
+		  } else {
+		    month--;
+		  }
+
+		  // Set date to the last day of the previous month
+		  date = monthLength[month - 2];
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
+		} else {
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";
+		}
+
+	      // Final case where the stock market is open
+	      } else {
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
+	      }    
+	    return datetime;
+    }
+
 
 //global variables for valuation
-var curClose = 0;
+var curClose;
 
      function showWeeklyText(responseAsText) {
 	    
@@ -263,7 +299,6 @@ var curClose = 0;
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
-	    //  var id = ['open', 'high', 'low', 'close', 'volume'];
 	           
 	     // var open = [],
 	      var oTemp = 0;
@@ -275,9 +310,6 @@ var curClose = 0;
 	      var cTemp = 0;
 	    //  var volume = [], 
 	      var vTemp = 0;
-
-	      // Insert text into table
-	  //   for (var j = 0; j < 25; j++) {
 		     
 		   // document.getElementById('open').innerHTML
 		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
@@ -304,20 +336,9 @@ var curClose = 0;
 		     document.getElementbyId("volume").innerHTML = vTemp;
 	     
 	     	curClose = cTemp;
-		     
-	//     }     
+		       
     }
-/*
-    function displayData(open, high, low, close, volume) {
-    	     
-	     document.getElementById('open').innerHTML = open[0];
-	     document.getElementById('high').innerHTML = high[0];
-	     document.getElementById('low').innerHTML = low[0];
-	     document.getElementById('close').innerHTML = close[0];
-	     document.getElementbyId('volume').innerHTML = volume[0];
-    
-    }
-*/
+
     function fetchHistoricalData(pathToResource) {
 
 	      fetch(pathToResource)
@@ -340,10 +361,10 @@ var curClose = 0;
     }	  
 
 //global MA variables for valuation
-var MAshort = 0;
-var MAlong = 0;
-var lastMAshort = 0;
-var lastMAlong = 0;
+var MAshort;
+var MAlong;
+var lastMAshort;
+var lastMAlong;
 
 //50 day moving average
 
@@ -355,19 +376,6 @@ var lastMAlong = 0;
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
 	      
-	//      var MA = [], MATemp = 0;
-	     
-	     
-	/*
-	      // Insert text into table
-	     for (var j = 0; j < 25; j++) {
-		  
-		   // document.getElementById('open').innerHTML
-		    MATemp = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
-		   
-		    MA.push(MATemp);
-		     
-	     }*/
 	     MAshort = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
 	     document.getElementById("mas").innerHTML = MAshort;
 	     
@@ -431,6 +439,9 @@ var lastMAlong = 0;
 	function valuate(){
 		if (MAshort * 0.95 > curClose) {
 			document.getElementById("evaluation").innerHTML = "recommended buy";
+		}
+		else if(MAshort == 0 || curClose == 0){
+			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
 		else {
 			document.getElementById("evaluation").innerHTML = "do nothing";
