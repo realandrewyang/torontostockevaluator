@@ -439,7 +439,7 @@ var lastMAlong;
 	
 	function valuate(){
 		if (MAshort * 0.95 > curClose) {
-			document.getElementById("evaluation").innerHTML = "recommended buy";
+			document.getElementById("evaluation").innerHTML = "recommended action with stock: buy";
 		}
 		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
@@ -453,7 +453,7 @@ var lastMAlong;
 			}
 		}
 		else {
-			document.getElementById("evaluation").innerHTML = "do nothing";
+			document.getElementById("evaluation").innerHTML = "recommended action with stock: do nothing";
 		}
 	}
 
