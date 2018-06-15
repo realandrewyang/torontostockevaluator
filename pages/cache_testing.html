@@ -15,12 +15,17 @@
   <a href="search_ticker">Search Ticker</a>
   <a class="active" href="cache_testing">Cache Testing</a>
   <a href="biggest_gains">Biggest Gains</a>
-  <a href="about">About</a>
+  <a href="top_choices">Top Choices</a>
   <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+	<form>
+      <input type="text" onkeyup=getTicker(this) placeholder="Search Ticker" name="search" method="put" id="ticker">
+
+    	<script type="text/javascript" src = "https://realandrewyang.github.io/torontostockevaluator/scripts/retrieveAPI.js">
+
+	</script>	
+
     </form>
+    
   </div>
 </div>
 	
