@@ -19,8 +19,7 @@ The Evaluator has a scroll bar feature that shows all the stocks we support. In 
 Along with our five basic metrics, we also have a feature that displays the **50-day simple moving average** and **200-day simple moving average.** These metrics play a key role in higher level financial decisions, which is why we have included them.
 
 ## Restrictions
-Before 9:00 a.m., the Toronto Stock Evaluator will display the data obtained at 4:00 p.m. the previous day.
-
-After 4:00 p.m., the Evaluator displays the data obtained at 3:59 p.m. on that day
-
-On a weekend, the Evaluator displays the data obtained at 4:00 p.m. on the most recent Friday.
+Because the stock market opens at 9:00 a.m. local time and closes at 4:00 p.m. local time on weekdays, the following restrictions have been set:
+- Before 9:00 a.m., the Toronto Stock Evaluator will display the data obtained at 4:00 p.m. the previous day.
+- After 4:00 p.m., the Evaluator displays the data obtained at 3:59 p.m. on that day
+- On a weekend, the Evaluator displays the data obtained at 4:00 p.m. on the most recent Friday.
