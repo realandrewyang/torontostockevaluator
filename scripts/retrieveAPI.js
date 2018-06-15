@@ -269,7 +269,7 @@
 	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	      var date = parseInt(currentdate.getDate());
 		
-	      if (currentdate == 1){
+	       if (currentdate == 1){
 
 		  // January 1st exception
 		  if (month == 1){
@@ -284,12 +284,11 @@
 		  date = monthLength[month - 2];
 		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		} 
-		date--;
+		
 	      else {
+		  date--;
 		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		}
-
-	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
 		
 	    return datetime;	
     }
