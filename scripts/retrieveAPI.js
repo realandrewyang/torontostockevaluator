@@ -252,7 +252,7 @@
 	      var month = parseInt(currentdate.getMonth()) + 1;
 	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 		//trying to edit the day here so that datetime contains yesterday's date
-	      var date = parseInt(currentdate.getDate()) -1;
+	      var date = parseInt(currentdate.getDate());
 	      var hour = parseInt(currentdate.getHours());
 	      var minute = parseInt(currentdate.getMinutes());
 
@@ -436,6 +436,9 @@ var lastMAlong;
 		}
 }
 
+
+	
+
 	
 	function valuate(){
 		if (MAshort * 0.95 > curClose) {
@@ -444,7 +447,7 @@ var lastMAlong;
 		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
-		else if (MAshort + MAshort * 0.05 >= MAlong && MAlong <= MAshort - MAshort*0.05){
+		else if (MAshort == MAlong){
 			if (lastMAshort > lastMAlong){
 				document.getElementById("evaluation").innerHTML = "stock's price is falling";
 			}
