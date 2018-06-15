@@ -7,6 +7,15 @@ Our website is hosted by Github Pages.
 
 ## Features
 ### Searching tickers
-The Evaluator has a search feature that allows the user to find the open, high, low, close, and volume metrics for any company's stocks. To find a company's data, follow the steps below:
+The Evaluator has a search feature that allows the user to find the open, high, low, close, and volume metrics for any company's stocks, as well as the current price of the stock. To find a company's data, follow the steps below:
 1. Enter the stock ticker of the company into the search bar (ex: AAPL for Apple) **Note: This feature is case sensitive. You must            enter the ticker in ALL CAPS.**
 2. Be patient. Currently, our system does not use a cache or cookies so the data may take a while to load.
+3. The name of the corresponding company will appear, along with all six basic metrics. These are calculated on a per-minute basis.
+
+### Searching ticker list
+The Evaluator has a scroll bar feature that shows all the stocks we support. In addition to stocks traded on the Toronto Stock Exchange, we also support stocks on NASDAQ and the NYSE.
+
+### Additional Metrics
+Along with our five basic metrics, we also have a feature that displays the **50-day simple moving average** and **200-day simple moving average.** These metrics play a key role in higher level financial decisions, which is why we have included them.
+
+## Restrictions
