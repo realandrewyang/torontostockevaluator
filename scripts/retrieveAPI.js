@@ -344,7 +344,7 @@ var curClose;
 		       
     }
 
-    function fetchHistoricalData(pathToResource) {
+    function fetchWeeklyData(pathToResource) {
 
 	      fetch(pathToResource)
 	      .then(validateResponse)
@@ -359,7 +359,7 @@ var curClose;
 	      document.getElementById("symbol").innerHTML = ticker;
 
 	      if (checkTicker(input.value) == true){
-		     fetchHistoricalData('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + ticker
+		     fetchWeeklyData('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + ticker
 		      + '&apikey=4IZG324QO46F99VH'); 
 	      }
     }	  
@@ -444,21 +444,21 @@ var lastMAlong;
 	
 	function valuate(){
 		if (MAshort * 0.95 > curClose) {
-			document.getElementById("evaluation").innerHTML = "recommended action with stock: buy";
+			document.getElementById("evaluation").innerHTML = "Recommended action with stock: BUY";
 		}
 		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
-		else if (MAshort == MAlong){
-			if (lastMAshort > lastMAlong){
-				document.getElementById("evaluation").innerHTML = "stock's price is falling";
+		else if (MAshort - MAshort * 0.95 <= MAlong && MAlong <= MAshort + MAshort * 0.95){
+			if (MAshort + MAshort *0.95 > lastMAshort && lastMAshort > lastMAlong){
+				document.getElementById("evaluation").innerHTML = "The stock's price is falling";
 			}
-			else if (lastMAshort < lastMAlong){
-				document.getElementById("evaluation").innerHTML = "stock's price is increasing";
+			else if (MAshort - MAshort * 0.95 < lastMAshort && lastMAshort < lastMAlong){
+				document.getElementById("evaluation").innerHTML = "The stock's price is increasing";
 			}
 		}
 		else {
-			document.getElementById("evaluation").innerHTML = "recommended action with stock: do nothing";
+			document.getElementById("evaluation").innerHTML = "Recommended action with stock: Do nothing";
 		}
 	}
 
