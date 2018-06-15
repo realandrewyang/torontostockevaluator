@@ -345,7 +345,6 @@ var curClose;
 	      .then(validateResponse)
 	      .then(readResponseAsText)
 	      .then(showWeeklyText)
-	      .then(displayData)
 	      .catch(logError);
     }
 
@@ -375,9 +374,10 @@ var lastMAlong;
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
-	      
-	     MAshort = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
-	     document.getElementById("mas").innerHTML = MAshort;
+	     
+	     document.getElementById("mas").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     
+	     MAshort = document.getElementById("mas").innerHTML;
 	     
     }
 
@@ -412,8 +412,9 @@ var lastMAlong;
 	      
 	 //     var LMA = [], LMATemp = 0;
 	     
-	     MAlong = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
-	     document.getElementById("mal").innerHTML = MAlong;
+	     document.getElementById("mal").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     
+	     MAlong = document.getElementById("mal").innerHTML;
 	     
     }
 
@@ -440,8 +441,16 @@ var lastMAlong;
 		if (MAshort * 0.95 > curClose) {
 			document.getElementById("evaluation").innerHTML = "recommended buy";
 		}
-		else if(MAshort == 0 || curClose == 0){
+		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
+		}
+		else if (MAshort + MAshort * 0.05 >= MAlong && MAlong <= MAshort - MAshort*0.05){
+			if (lastMAshort > lastMAlong){
+				document.getElementById("evaluation").innerHTML = "stock's price is falling";
+			}
+			else if (lastMAshort < lastMAlong){
+				document.getElementById("evaluation").innerHTML = "stock's price is increasing";
+			}
 		}
 		else {
 			document.getElementById("evaluation").innerHTML = "do nothing";
