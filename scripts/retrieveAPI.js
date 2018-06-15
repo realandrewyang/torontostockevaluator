@@ -375,8 +375,8 @@ var lastMAlong;
 
      function showMovingAverage(responseAsText) {
 	    
-	      // Get date with getTime()
-	      var datetime = getTime();
+	      // Get current date 
+	      var datetime = getDay();
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
@@ -410,13 +410,11 @@ var lastMAlong;
 //200 day moving average
      function showMovingAverageLong(responseAsText) {
 	    
-	      // Get date with getTime()
-	      var datetime = getTime();
+	      // Get current date 
+	      var datetime = getDay();
 
 	      // Parse text and create keys
 	      var obj = JSON.parse(responseAsText);
-	      
-	 //     var LMA = [], LMATemp = 0;
 	     
 	     document.getElementById("mal").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
 	     
@@ -441,7 +439,6 @@ var lastMAlong;
 			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
 		}
 }
-
 
 	
 
