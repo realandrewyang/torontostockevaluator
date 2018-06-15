@@ -2,7 +2,7 @@
 The Toronto Stock Evaluator provides real-time data analysis concerning the Toronto Stock Exchange.
 
 ## Acknowledgements
-We are proud to use the [Alpha Vantage] (https://www.alphavantage.co/) stock market API.
+We are proud to use the [Alpha Vantage](https://www.alphavantage.co/) stock market API.
 Our website is hosted by Github Pages.
 
 ## Features
