@@ -243,49 +243,55 @@
 	    return datetime;
     }
 
-
-	function getLastDate() {    
-	      // Get yesterday's date
+	function getDay(){
+		// Get current day, month, year
 	      var datetime = "";
 	      var currentdate = new Date();
 	      var year = parseInt(currentdate.getFullYear());
 	      var month = parseInt(currentdate.getMonth()) + 1;
 	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-		//trying to edit the day here so that datetime contains yesterday's date
 	      var date = parseInt(currentdate.getDate());
-	      var hour = parseInt(currentdate.getHours());
-	      var minute = parseInt(currentdate.getMinutes());
 
-	      // Check if market is currently closed
-	      if (hour * 60 + minute > 16 * 60){
-		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
 
-	      // Use previous day if market will open later in the day
-	      } else if (hour < 9){
+	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
+		
+	    return datetime;	
+	
+	}
 
-		// Beginning of the month exception
-		if (currentdate == 1){
+
+	function getLastDay() {    
+	      // Get yesterday's day, month, year
+	      var datetime = "";
+	      var currentdate = new Date();
+	      var year = parseInt(currentdate.getFullYear());
+	      var month = parseInt(currentdate.getMonth()) + 1;
+	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	      var date = parseInt(currentdate.getDate());
+		
+	      if (currentdate == 1){
 
 		  // January 1st exception
 		  if (month == 1){
 		    year--;
 		    month = 12;
-		  } else {
+		  }
+		  else {
 		    month--;
 		  }
 
 		  // Set date to the last day of the previous month
 		  date = monthLength[month - 2];
-		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + "15:59:00";
-		} else {
-		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
+		} 
+		date--;
+	      else {
+		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		}
 
-	      // Final case where the stock market is open
-	      } else {
-		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
-	      }    
-	    return datetime;
+	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
+		
+	    return datetime;	
     }
 
 
