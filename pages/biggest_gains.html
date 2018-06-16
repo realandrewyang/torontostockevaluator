@@ -19,7 +19,7 @@
     <form>
       <script src = "https://realandrewyang.github.io/torontostockevaluator/scripts/retrieveAPI.js">
       </script>
-      <input type="text" onkeyup="getWeeklyTicker(this);getMovingAverage(this); getMovingAverageLong(this); valuate()" placeholder="Search Ticker" name="search" method="put" id="ticker">
+      <input type="text" onkeyup="getSpotTicker(this);getMovingAverage(this); getMovingAverageLong(this); getStrength(this); valuate()" placeholder="Search Ticker" name="search" method="put" id="ticker">
 	    
     </form>
   </div>
@@ -37,21 +37,16 @@
 	<p id = 'symbol'> </p>
 	<p id = 'name'> </p>
 	<p id = 'evaluation'> </p>
+	<p id = 'actions'> </p>
+	<p id = 'consider'> </p>
+	<p id = 'decision'> </p>
 </div>
 <div>
 	<p id = 'mas'> </p>
 	<p id = 'mal'> </p>
 </div>
 <ul>
-	<li id = 'open'>
-		</li>
-	<li id = 'high'>
-		</li>
-	<li id = 'low'>
-		</li>
 	<li id = 'close'>
-		</li>
-	<li id = 'volume'>
 		</li>
 </ul>
 	  
