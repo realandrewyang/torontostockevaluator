@@ -328,6 +328,7 @@ var curClose;
 	     
 	        //Give global variable the spot price of the stock so that the spot price can be accessed for valuation
 	     	curClose = cTemp;
+	return responseAsText;
 		       
     }
 
@@ -337,6 +338,9 @@ var curClose;
 	      .then(validateResponse)
 	      .then(readResponseAsText)
 	      .then(showSpotPrice)
+	      .then(showMovingAverage)
+	      .then(showMovingAverageLong)
+	      .then(showStrength)
 	      .catch(logError);
     }
 
@@ -373,6 +377,8 @@ var lastMAlong;
 	     document.getElementById("mas").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
 	     
 	     MAshort = document.getElementById("mas").innerHTML;
+	     
+	     return responseAsText;
 	     
     }
 
@@ -411,6 +417,8 @@ var lastMAlong;
 	     
 	     MAlong = document.getElementById("mal").innerHTML;
 	     
+	     return responseAsText;
+	     
     }
 
     function fetchMovingAverageLong(pathToResource) {
@@ -431,50 +439,11 @@ var lastMAlong;
 		if (checkTicker(input.value) == true){
 			fetchMovingAverageLong(url);	
 		}
-}
+	}
 
 //RSI global variable for Valuation
 var RSI;
 
-     function showStrength(responseAsText) {
-	    
-	      // Get current date 
-	      var datetime = getDay();
-
-	      // Parse text and create object containing API object
-	      var obj = JSON.parse(responseAsText);
-	     
-	     //store the value for current RSI in the rsi ID so that it can be displayed on the page
-	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]['RSI']);
-	     
-	     RSI = document.getElementById("rsi").innerHTML;
-	     
-    }
-
-
-
-    function fetchStrength(pathToResource) {
-	      fetch(pathToResource)
-	      .then(validateResponse)
-	      .then(readResponseAsText)
-	      .then(showStrength)
-	      .catch(logError);
-    }
-
-	function getStrength(input){
-		var ticker = input.value;
-		
-		var url = 'https://www.alphavantage.co/query?function=RSI&symbol=' + ticker + 
-		    '&interval=daily&time_period=14&series_type=close&apikey=4IZG324QO46F99VH';
-		
-		if (checkTicker(input.value) == true){
-			fetchMovingAverage(url);	
-		}
-}
-
-
-
-	
 	function valuate(){
 		var score;
 		
@@ -509,6 +478,47 @@ var RSI;
 			document.getElementById("actions").innerHTML = "No definite action is currently advisable.";
 		}
 	}
+
+     function showStrength(responseAsText) {
+	    
+	      // Get current date 
+	      var datetime = getDay();
+
+	      // Parse text and create object containing API object
+	      var obj = JSON.parse(responseAsText);
+	     
+	     //store the value for current RSI in the rsi ID so that it can be displayed on the page
+	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]['RSI']);
+	     
+	     RSI = document.getElementById("rsi").innerHTML;
+	     
+	     valuate();
+	     
+	     return responseAsText;
+	     
+    }
+
+
+
+    function fetchStrength(pathToResource) {
+	      fetch(pathToResource)
+	      .then(validateResponse)
+	      .then(readResponseAsText)
+	      .then(showStrength)
+	      .catch(logError);
+    }
+
+	function getStrength(input){
+		var ticker = input.value;
+		
+		var url = 'https://www.alphavantage.co/query?function=RSI&symbol=' + ticker + 
+		    '&interval=daily&time_period=14&series_type=close&apikey=4IZG324QO46F99VH';
+		
+		if (checkTicker(input.value) == true){
+			fetchMovingAverage(url);	
+		}
+}
+
 
 
 
