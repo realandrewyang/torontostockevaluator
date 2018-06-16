@@ -514,7 +514,7 @@ var RSI;
 			score= score + 3;
 		}
 		//error check for information retrieval 
-		else if (MAshort = undefined || curClose = undefined){
+		else if (MAshort == undefined || curClose == undefined){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
 		else if (MAshort * 0.95 <= MAlong && MAlong <= MAshort * 1.05){
