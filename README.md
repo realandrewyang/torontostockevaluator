@@ -16,7 +16,7 @@ The Evaluator has a search feature that allows the user to find the open, high, 
 The Evaluator has a scroll bar feature that shows all the stocks we support. In addition to stocks traded on the Toronto Stock Exchange, we also support stocks on NASDAQ and the NYSE.
 
 ### Additional Metrics
-Along with our five basic metrics, we also have a feature that uses the **50-day simple moving average** and **200-day simple moving average** to evaluate a stock as well as the **Relative Strength Index** for advising whether a stock should be invested in or not. These metrics play a key role in higher level financial decisions, which is why we have included them.
+Along with our six basic metrics, we also have a feature that uses the **50-day simple moving average** and **200-day simple moving average** to evaluate a stock as well as the **Relative Strength Index** for advising whether a stock should be invested in or not. These metrics play a key role in higher level financial decisions, which is why we have included them.
 
 ## Restrictions
 Because the stock market opens at 9:00 a.m. local time and closes at 4:00 p.m. local time on weekdays, the following restrictions have been set:
