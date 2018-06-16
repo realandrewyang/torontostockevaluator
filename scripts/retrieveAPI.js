@@ -551,8 +551,8 @@ var RSI;
 			else if (score >= 5){
 				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong buy.";
 			}
-			else {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " /*+ score.toString()*/ + ", which indicates that it is a moderate buy.";
+			else if (1 < score && score < 5) {
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a moderate buy.";
 			}
 		}
 	}
