@@ -310,39 +310,8 @@ var curClose;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	           
-/*	     // var open = [],
-	      var oTemp = 0;
-	     // var high = [], 
-	      var hTemp = 0;
-	      //var low = []
-	      var lTemp = 0;
-	      //var close = [], */
-	     
-	   
-	     
-	    //  var volume = [], 
-//	      var vTemp = 0;
-		     
-/*		   // document.getElementById('open').innerHTML
-		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
-		    //document.getElementById('high').innerHTML = 
-		    hTemp = parseInt(obj["Weekly Time Series"][datetime]['2. high']);
-		    //document.getElementById('low').innerHTML = 
-	            lTemp = parseInt(obj["Weekly Time Series"][datetime]['3. low']);
-		   // document.getElementById('close').innerHTML */
-	     
-		    
-	     
-		 //   document.getElementById('volume').innerHTML 
-//		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
-		   
-		     //testing to see if it works
-/*		     console.log(oTemp);
-		     console.log(hTemp);
-		     console.log(lTemp);*/
-	     
 	     var cTemp = 0;
-	     
+	     //stores spot value in temporary variable
 	     cTemp = parseInt(["Time Series (1min)"][datetime]['4. close']);
 		     
 	     console.log(cTemp);
@@ -517,7 +486,7 @@ var RSI;
 			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently under-estimated. Do consider buying the stock, but look at other indicators to consolidate what action is most advisable";
 			score++;
 		}
-		if (MALong * 0.95 > curClose) {
+		if (MAlong * 0.95 > curClose) {
 			document.getElementById("actions").innerHTML = "Recommended action with stock based on spot value analysis: If this is a blue-chip stock, buy it. Else, keep your eyes on the stock, but no definite action is advisable.";
 			score= score + 3;
 		}
