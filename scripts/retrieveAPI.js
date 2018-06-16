@@ -338,9 +338,6 @@ var curClose;
 	      .then(validateResponse)
 	      .then(readResponseAsText)
 	      .then(showSpotPrice)
-	      .then(showMovingAverage)
-	      .then(showMovingAverageLong)
-	      .then(showStrength)
 	      .catch(logError);
     }
 
@@ -377,8 +374,6 @@ var lastMAlong;
 	     document.getElementById("mas").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
 	     
 	     MAshort = document.getElementById("mas").innerHTML;
-	     
-	     return responseAsText;
 	     
     }
 
@@ -417,8 +412,6 @@ var lastMAlong;
 	     
 	     MAlong = document.getElementById("mal").innerHTML;
 	     
-	     return responseAsText;
-	     
     }
 
     function fetchMovingAverageLong(pathToResource) {
@@ -444,41 +437,6 @@ var lastMAlong;
 //RSI global variable for Valuation
 var RSI;
 
-	function valuate(){
-		var score;
-		
-		if (RSI >= 70){
-			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently over-estimated. Do consider selling the stock if you own shares, but look at other indicators to consolidate what action is most advisable.";
-			score--;
-		}
-		else if (RSI <= 30){
-			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently under-estimated. Do consider buying the stock, but look at other indicators to consolidate what action is most advisable";
-			score++;
-		}
-		if (MAlong * 0.95 > curClose) {
-			document.getElementById("actions").innerHTML = "Recommended action with stock based on spot value analysis: If this is a blue-chip stock, buy it. Else, keep your eyes on the stock, but no definite action is advisable.";
-			score= score + 3;
-		}
-		else if (MAshort == 0 || curClose == 0){
-			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
-		}
-		else if (MAshort * 0.95 <= MAlong && MAlong <= MAshort * 1.05){
-			if (lastMAshort > MAshort){
-				document.getElementById("evaluation").innerHTML = "Death Cross: The stock's price is projected to fall based on moving average analysis.";
-				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, sell it. If you don't own the stock, short-sell it.";
-				score = score -5;
-			}
-			else if (lastMAshort > MAshort){
-				document.getElementById("evaluation").innerHTML = "The stock's price is pojected to increase based on moving average analysis.";
-				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, hold current shares or buy more. If you don't own the stock, buy it.";
-				score = score +5;
-			}
-		}
-		else {
-			document.getElementById("actions").innerHTML = "No definite action is currently advisable.";
-		}
-	}
-
      function showStrength(responseAsText) {
 	    
 	      // Get current date 
@@ -490,24 +448,20 @@ var RSI;
 	     //store the value for current RSI in the rsi ID so that it can be displayed on the page
 	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]['RSI']);
 	     
-	     RSI = document.getElementById("rsi").innerHTML;
-	     
-	     valuate();
-	     
-	     return responseAsText;
+	     RSI = document.getElementById("rsi").innerHTML;	     
 	     
     }
 
-
-
-    function fetchStrength(pathToResource) {
-	      fetch(pathToResource)
-	      .then(validateResponse)
-	      .then(readResponseAsText)
-	      .then(showStrength)
-	      .catch(logError);
+    //sequence to go from input to RSI current retrieval from API
+	function fetchStrength(pathToResource) {
+		fetch(pathToResource)
+		.then(validateResponse)
+		.then(readResponseAsText)
+		.then(showStrength)
+		.catch(logError);
     }
 
+	//takes user input and searches API to retrieve the current RSI 
 	function getStrength(input){
 		var ticker = input.value;
 		
@@ -517,7 +471,74 @@ var RSI;
 		if (checkTicker(input.value) == true){
 			fetchMovingAverage(url);	
 		}
-}
+    }
+
+	//based on RSI, Moving Average crossover, and Spot Value cto Moving Average comparison, the searched for stock is evaluated
+	//and determined whether it should be bought or sold or neither.
+	function valuateStock(){
+		//declare score variable for to quantify the evaluation. An over all positive value will mean it is advisable to buy
+		//and an over all negative value will mean that it is advisable to sell.
+		var score;
+		if (RSI >= 70){
+			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently over-estimated. Do consider selling the stock if you own shares, but look at other indicators to consolidate what action is most advisable.";
+			//slightly descrease score because analysis shows stock is over-valued
+			score--;
+		}
+		else if (RSI <= 30){
+			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently under-estimated. Do consider buying the stock, but look at other indicators to consolidate what action is most advisable";
+			//slightly increase score because analysis shows stock is under-valued
+			score++;
+		}
+		if (MAlong * 0.95 > curClose) {
+			document.getElementById("actions").innerHTML = "Recommended action with stock based on spot value analysis: If this is a blue-chip stock, buy it. Else, keep your eyes on the stock, but no definite action is advisable.";
+			//increase score because stock is at a recently unprecedented low price
+			score= score + 3;
+		}
+		//error check for information retrieval 
+		else if (MAshort = undefined || curClose = undefined){
+			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
+		}
+		else if (MAshort * 0.95 <= MAlong && MAlong <= MAshort * 1.05){
+			if (lastMAshort > MAshort){
+				document.getElementById("evaluation").innerHTML = "Death Cross: The stock's price is projected to fall based on moving average analysis.";
+				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, sell it. If you don't own the stock, short-sell it.";
+				//decrease score greatly because the moving average analysis indicates that the stock is very likely to drop in price
+				score = score -5;
+			}
+			else if (lastMAshort > MAshort){
+				document.getElementById("evaluation").innerHTML = "The stock's price is pojected to increase based on moving average analysis.";
+				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, hold current shares or buy more. If you don't own the stock, buy it.";
+				//increase score greatly because the moving average analysis indicates that the stock is very likely to rise in price
+				score = score +5;
+			}
+		}
+		else {
+			document.getElementById("actions").innerHTML = "No definite action is currently advisable.";
+		}
+		//based on overall score, give the user a recommendation on the stock
+		if (score < 0){
+			document.getElementById("decision").innerHTML = "Overall analysis recommends that the stock is to be sold.";
+			if (score <= -4) {
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong sell.";
+			}
+			else {
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a light sell, but selling now might not be advisable.";
+			}
+		}
+		else {
+			if (score == 1) {
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a light buy, but buying now might not be advisable.";
+			}
+			else if (score >= 5){
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong buy.";
+			}
+			else {
+				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a moderate buy.";
+			}
+		}
+	}
+
+
 
 
 
