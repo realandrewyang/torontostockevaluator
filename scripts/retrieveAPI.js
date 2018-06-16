@@ -86,7 +86,7 @@
 
       // If it's a weekend
       if (currentdate.getDay() == 0 || currentdate.getDay() == 6){
-	currentdate = wrapWeekend(datetime);
+	currentdate = wrapWeekend(currentdate);
 	isWeekend = true;
       }
 
