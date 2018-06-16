@@ -19,7 +19,7 @@
     <form>
       <script src = "https://realandrewyang.github.io/torontostockevaluator/scripts/retrieveAPI.js">
       </script>
-      <input type="text" onkeyup="getSpotTicker(this);" placeholder="Search Ticker" name="search" method="put" id="ticker">
+      <input type="text" onkeyup="getSpotTicker(this); getMovingAverage(this); getMovingAverageLong(this); getStrength(this); valuateStock()" placeholder="Search Ticker" name="search" method="put" id="ticker">
 	    
     </form>
   </div>
