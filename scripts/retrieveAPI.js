@@ -244,7 +244,7 @@
     }
 
 	function getDay(){
-		// Get current day, month, year
+	      // Get current day, month, year
 	      var datetime = "";
 	      var currentdate = new Date();
 	      var year = parseInt(currentdate.getFullYear());
@@ -252,7 +252,7 @@
 	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	      var date = parseInt(currentdate.getDate());
 
-
+	    //format the date so that it can be returned in the form that will be understood by the API
 	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
 		
 	    return datetime;	
@@ -261,7 +261,7 @@
 
 
 	function getLastDay() {    
-	      // Get yesterday's day, month, year
+	      // Get the day, month, year for 10 days ago
 	      var datetime = "";
 	      var currentdate = new Date();
 	      var year = parseInt(currentdate.getFullYear());
@@ -269,9 +269,10 @@
 	      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	      var date = parseInt(currentdate.getDate());
 		
-	       if (currentdate == 1){
+		//re-adjust month and year values if taking 10 days away from the current date will produce an invalid date
+	       if (currentdate <= 10){
 
-		  // January 1st exception
+		  // January exception
 		  if (month == 1){
 		    year--;
 		    month = 12;
@@ -280,13 +281,16 @@
 		    month--;
 		  }
 
-		  // Set date to the last day of the previous month
-		  date = monthLength[month - 2];
+		  // Set date to the previous month
+		  date = monthLength[month - 2] - 10;
+		  //format the date so that it can be returned in the form that will be understood by the API
 		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		} 
 		
 	      else {
-		  date--;
+		  //set date back by 10 days
+		  date = date - 10;
+		  //format the date so that it can be returned in the form that will be understood by the API
 		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		}
 		
@@ -297,72 +301,90 @@
 //global variables for valuation
 var curClose;
 
-     function showWeeklyText(responseAsText) {
+     function showSpotPrice(responseAsText) {
 	    
 	      // Get date with getTime()
 	      var datetime = getTime();
 
-	      // Parse text and create keys
+	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	           
-	     // var open = [],
+/*	     // var open = [],
 	      var oTemp = 0;
 	     // var high = [], 
 	      var hTemp = 0;
 	      //var low = []
 	      var lTemp = 0;
-	      //var close = [], 
-	      var cTemp = 0;
+	      //var close = [], */
+	     
+	   
+	     
 	    //  var volume = [], 
-	      var vTemp = 0;
+//	      var vTemp = 0;
 		     
-		   // document.getElementById('open').innerHTML
+/*		   // document.getElementById('open').innerHTML
 		    oTemp = parseInt(obj["Weekly Time Series"][datetime]['1. open']);
 		    //document.getElementById('high').innerHTML = 
 		    hTemp = parseInt(obj["Weekly Time Series"][datetime]['2. high']);
 		    //document.getElementById('low').innerHTML = 
 	            lTemp = parseInt(obj["Weekly Time Series"][datetime]['3. low']);
-		   // document.getElementById('close').innerHTML 
-		    cTemp = parseInt(["Weekly Time Series"][datetime]['4. close']);
+		   // document.getElementById('close').innerHTML */
+	     
+		    
+	     
 		 //   document.getElementById('volume').innerHTML 
-		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
+//		    vTemp = parseInt(obj["Weekly Time Series"][datetime]['5. volume']);
 		   
 		     //testing to see if it works
-		     console.log(oTemp);
+/*		     console.log(oTemp);
 		     console.log(hTemp);
-		     console.log(lTemp);
-		     console.log(cTemp);
-		     console.log(vTemp);
+		     console.log(lTemp);*/
 	     
-	     	     document.getElementById("open").innerHTML = oTemp;
+	     var cTemp = 0;
+	     
+	     cTemp = parseInt(["Time Series (1min)"][datetime]['4. close']);
+		     
+	     console.log(cTemp);
+	     
+//		     console.log(vTemp);
+	     
+/*	     	     document.getElementById("open").innerHTML = oTemp;
 	  	     document.getElementById("high").innerHTML = hTemp;
-	  	     document.getElementById("low").innerHTML = lTemp;
-	   	     document.getElementById("close").innerHTML = cTemp;
-		     document.getElementbyId("volume").innerHTML = vTemp;
+	  	     document.getElementById("low").innerHTML = lTemp;*/
 	     
+	   	     document.getElementById("close").innerHTML = cTemp;
+	     
+//		     document.getElementbyId("volume").innerHTML = vTemp;
+	     
+	        //Give global variable the spot price of the stock so that the spot price can be accessed for valuation
 	     	curClose = cTemp;
 		       
     }
 
-    function fetchWeeklyData(pathToResource) {
+    function fetchSpotData(pathToResource) {
 
 	      fetch(pathToResource)
 	      .then(validateResponse)
 	      .then(readResponseAsText)
-	      .then(showWeeklyText)
+	      .then(showSpotPrice)
 	      .catch(logError);
     }
 
-    function getWeeklyTicker(input){
+    function getSpotTicker(input){
 	      var ticker= input.value;
 
 	      document.getElementById("symbol").innerHTML = ticker;
+	    
+	      var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker
+	      + '&interval=1min&apikey=4IZG324QO46F99VH';
 
 	      if (checkTicker(input.value) == true){
-		     fetchWeeklyData('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + ticker
-		      + '&apikey=4IZG324QO46F99VH'); 
+		     fetchSpotData(url); 
 	      }
     }	  
+
+
+
 
 //global MA variables for valuation
 var MAshort;
@@ -377,7 +399,7 @@ var lastMAlong;
 	      // Get current date 
 	      var datetime = getDay();
 
-	      // Parse text and create keys
+	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
 	     document.getElementById("mas").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
@@ -412,7 +434,7 @@ var lastMAlong;
 	      // Get current date 
 	      var datetime = getDay();
 
-	      // Parse text and create keys
+	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
 	     document.getElementById("mal").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
@@ -439,22 +461,64 @@ var lastMAlong;
 		}
 }
 
+//RSI global variable for Valuation
+var RSI;
+
+     function showStrength(responseAsText) {
+	    
+	      // Get current date 
+	      var datetime = getDay();
+
+	      // Parse text and create object containing API object
+	      var obj = JSON.parse(responseAsText);
+	     
+	     document.getElementById("mas").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     
+	     MAshort = document.getElementById("mas").innerHTML;
+	     
+    }
+
+
+
+    function fetchMovingAverage(pathToResource) {
+	      fetch(pathToResource)
+	      .then(validateResponse)
+	      .then(readResponseAsText)
+	      .then(showMovingAverage)
+	      .catch(logError);
+    }
+
+	function getMovingAverage(input){
+		var ticker = input.value;
+		
+		if (checkTicker(input.value) == true){
+			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			+ '&interval=daily&time_period=50&series_type=close&apikey=4IZG324QO46F99VH');	
+		}
+}
+
+
+
+https://www.alphavantage.co/query?function=RSI&symbol=MSFT&interval=daily&time_period=14&series_type=close&apikey=4IZG324QO46F99VH
+
 	
 
 	
 	function valuate(){
-		if (MAshort * 0.95 > curClose) {
-			document.getElementById("evaluation").innerHTML = "Recommended action with stock: BUY";
+		if (MALong * 0.95 > curClose) {
+			document.getElementById("actions").innerHTML = "Recommended action with stock: If this is a blue-chip stock, BUY. Else, keep your eyes on the stock, but no definite action is advisable.";
 		}
 		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
-		else if (MAshort - MAshort * 0.95 <= MAlong && MAlong <= MAshort + MAshort * 0.95){
-			if (MAshort + MAshort *0.95 > lastMAshort && lastMAshort > lastMAlong){
-				document.getElementById("evaluation").innerHTML = "The stock's price is falling";
+		else if (MAshort * 0.95 <= MAlong && MAlong <= MAshort * 1.05){
+			if (lastMAshort > MAshort){
+				document.getElementById("evaluation").innerHTML = "The stock's price is projected to fall";
+				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, sell it. If you don't own the stock, short-sell it.";
 			}
-			else if (MAshort - MAshort * 0.95 < lastMAshort && lastMAshort < lastMAlong){
-				document.getElementById("evaluation").innerHTML = "The stock's price is increasing";
+			else if (lastMAshort > MAshort){
+				document.getElementById("evaluation").innerHTML = "The stock's price is pojected to increase";
+				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, hold current shares or buy more. If you don't own the stock, buy it.";
 			}
 		}
 		else {
