@@ -298,6 +298,16 @@
 	    return datetime;	
     }
 
+	//scripts a wait for the number of miliseconds you instruct it to wait
+	function wait(ms){
+		var start = new Date().getTime();
+		var end = start; 
+		//updates the end date until it meets target date for the wait so that the program may proceed
+		while(end < start + ms) {
+			end = new Date().getTime();
+	   	}
+	}
+
 
 //global spot price variable for valuation
 var curClose;
@@ -332,6 +342,7 @@ var curClose;
 		       
     }
 
+    //sequence to go from input to spot price retrieval from API
     function fetchSpotData(pathToResource) {
 
 	      fetch(pathToResource)
@@ -352,6 +363,8 @@ var curClose;
 	      if (checkTicker(input.value) == true){
 		     fetchSpotData(url); 
 	      }
+	    //wait 1.5 seconds so as not to flood Alpha Vantage with API requests
+	    wait(1500);
     }	  
 
 
@@ -361,7 +374,7 @@ var MAlong;
 var lastMAshort;
 var lastMAlong;
 
-//50 day moving average 
+//50 day moving average retrieval
 
      function showMovingAverage(responseAsText) {
 	    
@@ -378,7 +391,7 @@ var lastMAlong;
     }
 
 
-
+    //sequence to go from input to 50-day MA retrieval from API
     function fetchMovingAverage(pathToResource) {
 	      fetch(pathToResource)
 	      .then(validateResponse)
@@ -396,10 +409,13 @@ var lastMAlong;
 		if (checkTicker(input.value) == true){
 			fetchMovingAverage(url);	
 		}
+		//wait 1.5 seconds so as not to flood Alpha Vantage with API requests
+		wait(1500);
 }
 
 
-//200 day moving average
+//200 day moving average retrieval
+
      function showMovingAverageLong(responseAsText) {
 	    
 	      // Get current date 
@@ -414,6 +430,7 @@ var lastMAlong;
 	     
     }
 
+    //sequence to go from input to 200-day MA retrieval from API
     function fetchMovingAverageLong(pathToResource) {
 	      fetch(pathToResource)
 	      .then(validateResponse)
@@ -432,6 +449,8 @@ var lastMAlong;
 		if (checkTicker(input.value) == true){
 			fetchMovingAverageLong(url);	
 		}
+		//wait 1.5 seconds so as not to flood Alpha Vantage with API requests
+	    	wait(1500);
 	}
 
 //RSI global variable for Valuation
@@ -452,7 +471,7 @@ var RSI;
 	     
     }
 
-    //sequence to go from input to RSI current retrieval from API
+    //sequence to go from input to current RSI retrieval from API
 	function fetchStrength(pathToResource) {
 		fetch(pathToResource)
 		.then(validateResponse)
