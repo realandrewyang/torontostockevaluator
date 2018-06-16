@@ -536,23 +536,22 @@ var RSI;
 		}
 		//based on overall score, give the user a recommendation on the stock
 		if (score < 0){
-			document.getElementById("decision").innerHTML = "Overall analysis recommends that the stock is to be sold.";
 			if (score <= -4) {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong sell.";
+				document.getElementById("decision").innerHTML = "We give the stock a score of " + score.toString() + ", which indicates that it is a strong sell.";
 			}
-			else {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a light sell, but selling now might not be advisable.";
+			else if (-4 < score && score < 0) {
+				document.getElementById("decision").innerHTML = "We give the stock a score of " + score.toString() + ", which indicates that it is a light sell, but selling now might not be advisable.";
 			}
 		}
 		else {
 			if (score == 1) {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a light buy, but buying now might not be advisable.";
+				document.getElementById("decision").innerHTML = "We give the stock a score of " + score.toString() + ", which indicates that it is a light buy, but buying now might not be advisable.";
 			}
 			else if (score >= 5){
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong buy.";
+				document.getElementById("decision").innerHTML = "We give the stock a score of " + score.toString() + ", which indicates that it is a strong buy.";
 			}
 			else if (1 < score && score < 5) {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a moderate buy.";
+				document.getElementById("decision").innerHTML = "We give the stock a score of " + score.toString() + ", which indicates that it is a moderate buy.";
 			}
 		}
 	}
