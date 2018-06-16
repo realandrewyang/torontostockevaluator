@@ -199,6 +199,7 @@
 	    
     }
 
+//Functions set up for the Biggest Gains page. They are used to retrieve information for valuation purposes.
 
     function getTime() {    
 	      // Get current date
@@ -298,7 +299,7 @@
     }
 
 
-//global variables for valuation
+//global spot price variable for valuation
 var curClose;
 
      function showSpotPrice(responseAsText) {
@@ -384,15 +385,13 @@ var curClose;
     }	  
 
 
-
-
-//global MA variables for valuation
+//global moving average variables for valuation
 var MAshort;
 var MAlong;
 var lastMAshort;
 var lastMAlong;
 
-//50 day moving average
+//50 day moving average 
 
      function showMovingAverage(responseAsText) {
 	    
@@ -402,7 +401,7 @@ var lastMAlong;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
-	     document.getElementById("mas").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     document.getElementById("mas").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
 	     
 	     MAshort = document.getElementById("mas").innerHTML;
 	     
@@ -421,9 +420,11 @@ var lastMAlong;
 	function getMovingAverage(input){
 		var ticker = input.value;
 		
+		var url = 'https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			+ '&interval=daily&time_period=50&series_type=close&apikey=4IZG324QO46F99VH';
+		
 		if (checkTicker(input.value) == true){
-			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
-			+ '&interval=daily&time_period=50&series_type=close&apikey=4IZG324QO46F99VH');	
+			fetchMovingAverage(url);	
 		}
 }
 
@@ -437,7 +438,7 @@ var lastMAlong;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
-	     document.getElementById("mal").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     document.getElementById("mal").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
 	     
 	     MAlong = document.getElementById("mal").innerHTML;
 	     
@@ -455,9 +456,11 @@ var lastMAlong;
 	function getMovingAverageLong(input){
 		var ticker = input.value;
 		
+		var url = 'https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
+			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH'
+		
 		if (checkTicker(input.value) == true){
-			fetchMovingAverageLong('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
-			+ '&interval=daily&time_period=200&series_type=close&apikey=4IZG324QO46F99VH');	
+			fetchMovingAverageLong(url);	
 		}
 }
 
@@ -472,57 +475,69 @@ var RSI;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
-	     document.getElementById("mas").innerHTML = parseInt(obj["Weekly Time Series"][datetime]['SMA']);
+	     //store the value for current RSI in the rsi ID so that it can be displayed on the page
+	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]['RSI']);
 	     
-	     MAshort = document.getElementById("mas").innerHTML;
+	     RSI = document.getElementById("rsi").innerHTML;
 	     
     }
 
 
 
-    function fetchMovingAverage(pathToResource) {
+    function fetchStrength(pathToResource) {
 	      fetch(pathToResource)
 	      .then(validateResponse)
 	      .then(readResponseAsText)
-	      .then(showMovingAverage)
+	      .then(showStrength)
 	      .catch(logError);
     }
 
-	function getMovingAverage(input){
+	function getStrength(input){
 		var ticker = input.value;
 		
+		var url = 'https://www.alphavantage.co/query?function=RSI&symbol=' + ticker + 
+		    '&interval=daily&time_period=14&series_type=close&apikey=4IZG324QO46F99VH';
+		
 		if (checkTicker(input.value) == true){
-			fetchMovingAverage('https://www.alphavantage.co/query?function=SMA&symbol=' + ticker 
-			+ '&interval=daily&time_period=50&series_type=close&apikey=4IZG324QO46F99VH');	
+			fetchMovingAverage(url);	
 		}
 }
 
 
 
-https://www.alphavantage.co/query?function=RSI&symbol=MSFT&interval=daily&time_period=14&series_type=close&apikey=4IZG324QO46F99VH
-
-	
-
 	
 	function valuate(){
+		var score;
+		
+		if (RSI >= 70){
+			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently over-estimated. Do consider selling the stock if you own shares, but look at other indicators to consolidate what action is most advisable.";
+			score--;
+		}
+		else if (RSI <= 30){
+			document.getElementById("consider").innerHTML = "Relative strength index indicates that stock is currently under-estimated. Do consider buying the stock, but look at other indicators to consolidate what action is most advisable";
+			score++;
+		}
 		if (MALong * 0.95 > curClose) {
-			document.getElementById("actions").innerHTML = "Recommended action with stock: If this is a blue-chip stock, BUY. Else, keep your eyes on the stock, but no definite action is advisable.";
+			document.getElementById("actions").innerHTML = "Recommended action with stock based on spot value analysis: If this is a blue-chip stock, buy it. Else, keep your eyes on the stock, but no definite action is advisable.";
+			score= score + 3;
 		}
 		else if (MAshort == 0 || curClose == 0){
 			document.getElementById("evaluation").innerHTML = "Error retrieving valuation information";
 		}
 		else if (MAshort * 0.95 <= MAlong && MAlong <= MAshort * 1.05){
 			if (lastMAshort > MAshort){
-				document.getElementById("evaluation").innerHTML = "The stock's price is projected to fall";
+				document.getElementById("evaluation").innerHTML = "Death Cross: The stock's price is projected to fall based on moving average analysis.";
 				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, sell it. If you don't own the stock, short-sell it.";
+				score = score -5;
 			}
 			else if (lastMAshort > MAshort){
-				document.getElementById("evaluation").innerHTML = "The stock's price is pojected to increase";
+				document.getElementById("evaluation").innerHTML = "The stock's price is pojected to increase based on moving average analysis.";
 				document.getElementById("actions").innerHTML = "Recommended actions with stock: If you own the stock, hold current shares or buy more. If you don't own the stock, buy it.";
+				score = score +5;
 			}
 		}
 		else {
-			document.getElementById("evaluation").innerHTML = "Recommended action with stock: Do nothing";
+			document.getElementById("actions").innerHTML = "No definite action is currently advisable.";
 		}
 	}
 
