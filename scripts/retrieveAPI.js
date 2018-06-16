@@ -552,7 +552,7 @@ var RSI;
 				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a strong buy.";
 			}
 			else {
-				document.getElementById("decision").innerHTML += "We give the stock a score of " + score.toString() + ", which indicates that it is a moderate buy.";
+				document.getElementById("decision").innerHTML += "We give the stock a score of " /*+ score.toString()*/ + ", which indicates that it is a moderate buy.";
 			}
 		}
 	}
