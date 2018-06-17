@@ -108,6 +108,7 @@ footer {background: #aaa;color:white;}
     left: 0px;
     top: 200px;
     height: 400px;
+    overflow-y: auto;
     background-color: #111;
     transition: 0.5s;
     padding-top: 60px;
