@@ -43,6 +43,11 @@ p.sansserif {
 header {background: black;color:white;}
 footer {background: #aaa;color:white;}
 
+.footer {
+	position: fixed;
+	bottom: 0;
+}
+
 * {box-sizing: border-box;}
 
 .topnav {
