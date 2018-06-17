@@ -37,6 +37,7 @@ p.sansserif {
 
 .article {
     text-align: center;
+    height: 1000px;
 }
 
 header {background: black;color:white;}
@@ -138,7 +139,7 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     position: fixed;
-    left: 50%;
+    left: 45%;
 }
 
 td {
