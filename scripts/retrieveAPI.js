@@ -36,7 +36,7 @@
 	    
       if (someDate.getDay() == 0){
         adjust = 2;
-      } else if (date.getDay() == 6){
+      } else if (someDate.getDay() == 6){
         adjust = 1;
       }
       
