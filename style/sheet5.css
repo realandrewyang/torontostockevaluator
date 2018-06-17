@@ -137,7 +137,8 @@ footer {background: #aaa;color:white;}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    text-align: center;
+    position: fixed;
+    left: 50%;
 }
 
 td {
