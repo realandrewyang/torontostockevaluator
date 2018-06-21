@@ -239,7 +239,7 @@
 
 	      // Final case where the stock market is open
 	      } else {
-		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
+		datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00" + "\"";  
 	      }    
 	    return datetime;
     }
@@ -254,7 +254,7 @@
 	      var date = parseInt(currentdate.getDate());
 
 	    //format the date so that it can be returned in the form that will be understood by the API
-	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
+	    datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + "\"";   
 		
 	    return datetime;	
 	
@@ -284,16 +284,15 @@
 
 		  // Set date to the previous month
 		  date = monthLength[month - 2] - 10;
-		  //format the date so that it can be returned in the form that will be understood by the API
-		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		} 
 		
 	      else {
 		  //set date back by 10 days
 		  date = date - 10;
-		  //format the date so that it can be returned in the form that will be understood by the API
-		  datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);
 		}
+		
+		//format the date so that it can be returned in the form that will be understood by the API
+		datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + "\"";
 		
 	    return datetime;	
     }
@@ -322,19 +321,12 @@ var curClose;
 	           
 	     var cTemp = 0;
 	     //stores spot value in temporary variable
-	     cTemp = parseInt(["Time Series (1min)"][datetime]['4. close']);
+	     cTemp = parseInt(["Time Series (1min)"][datetime]["4. close"]);
 		     
 	     console.log(cTemp);
 	     
-//		     console.log(vTemp);
-	     
-/*	     	     document.getElementById("open").innerHTML = oTemp;
-	  	     document.getElementById("high").innerHTML = hTemp;
-	  	     document.getElementById("low").innerHTML = lTemp;*/
 	     
 	   	     document.getElementById("close").innerHTML = cTemp;
-	     
-//		     document.getElementbyId("volume").innerHTML = vTemp;
 	     
 	        //Give global variable the spot price of the stock so that the spot price can be accessed for valuation
 	     	curClose = cTemp;
@@ -384,7 +376,7 @@ var lastMAlong;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
-	     document.getElementById("mas").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
+	     document.getElementById("mas").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]["SMA"]);
 	     
 	     MAshort = document.getElementById("mas").innerHTML;
 	     
@@ -424,7 +416,7 @@ var lastMAlong;
 	      // Parse text and create object containing API object
 	      var obj = JSON.parse(responseAsText);
 	     
-	     document.getElementById("mal").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]['SMA']);
+	     document.getElementById("mal").innerHTML = parseInt(obj["Technical Analysis: SMA"][datetime]["SMA"]);
 	     
 	     MAlong = document.getElementById("mal").innerHTML;
 	     
@@ -465,7 +457,7 @@ var RSI;
 	      var obj = JSON.parse(responseAsText);
 	     
 	     //store the value for current RSI in the rsi ID so that it can be displayed on the page
-	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]['RSI']);
+	     document.getElementById("rsi").innerHTML = parseInt(obj["Technical Analysis: RSI"][datetime]["RSI"]);
 	     
 	     RSI = document.getElementById("rsi").innerHTML;	     
 	     
@@ -555,21 +547,3 @@ var RSI;
 			}
 		}
 	}
-
-
-
-
-
-
-////////////////////////////////////////////////////
-/**
- * writeTextFile write data to file on hard drive
- * @param  string  filepath   Path to file on hard drive
- * @param  sring   output     Data to be written
- */
-function writeTextFile(filepath, output) {
-	var txtFile = new File(filepath);
-	txtFile.open("w"); //
-	txtFile.writeln(output);
-	txtFile.close();
-}
