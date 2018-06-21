@@ -239,7 +239,7 @@
 
 	      // Final case where the stock market is open
 	      } else {
-		datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00" + "\"";  
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) + " " + addZero(hour) + ":" + addZero(minute) + ":00";  
 	      }    
 	    return datetime;
     }
@@ -254,7 +254,7 @@
 	      var date = parseInt(currentdate.getDate());
 
 	    //format the date so that it can be returned in the form that will be understood by the API
-	    datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + "\"";   
+	    datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date);   
 		
 	    return datetime;	
 	
@@ -292,7 +292,7 @@
 		}
 		
 		//format the date so that it can be returned in the form that will be understood by the API
-		datetime = "\"" + year.toString() + "-" + addZero(month) + "-" + addZero(date) + "\"";
+		datetime = year.toString() + "-" + addZero(month) + "-" + addZero(date) ;
 		
 	    return datetime;	
     }
