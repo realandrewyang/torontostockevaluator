@@ -1,5 +1,6 @@
 # torontostockevaluator
 The Toronto Stock Evaluator provides real-time data analysis concerning the Toronto Stock Exchange.
+Note: The Toronto Stock Evaluator is a *prototype*. To see its successor, try the [Nifty Stock Tool](https://realandrewyang.github.io/niftystocktool).
 
 ## Acknowledgements
 We are proud to use the [Alpha Vantage](https://www.alphavantage.co/) stock market API.
